@@ -1,5 +1,5 @@
 <header>
-  <h1>Welcome to SvelteKit</h1>
+  <h1>My blog</h1>
   <ul>
     <li><a href="/">Home</a></li>
     <li><a href="/albums">Albums</a></li>
