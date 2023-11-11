@@ -1,5 +1,5 @@
 <header>
-  <h1>My blog</h1>
+  <title>TechTrek</title>
   <ul>
     <li><a href="/">Home</a></li>
     <li><a href="/albums">Albums</a></li>
