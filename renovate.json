@@ -7,7 +7,7 @@
     ":automergeTypes",
     ":automergeTesters",
     ":automergeLinters",
-    ":rebaseStablePrs"
+    ":rebaseStalePrs"
   ],
   "ignoreDeps": ["nanoid", "camelcase-keys"],
   "enabled": true
