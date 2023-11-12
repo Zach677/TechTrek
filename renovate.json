@@ -1,14 +1,6 @@
 {
   "labels": ["dependencies"],
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base",
-    ":automergePatch",
-    ":automergeTypes",
-    ":automergeTesters",
-    ":automergeLinters",
-    ":rebaseStalePrs"
-  ],
-  "ignoreDeps": ["nanoid", "camelcase-keys"],
+  "extends": ["config:base"],
   "enabled": true
 }
