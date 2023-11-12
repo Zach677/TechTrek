@@ -1,5 +1,11 @@
 # TechTrek
 
+## To Do
+- [ ] 布局好看
+- [ ] ui完善
+- [ ] 前后端分离
+- [ ] 等等....
+
 ## Getting started
 
 1. clone this repository
