@@ -6,6 +6,9 @@
 - [ ] 前后端分离
 - [ ] 等等....
 
+## Features
+<p>...</p>
+
 ## Getting started
 
 1. clone this repository
@@ -24,13 +27,14 @@ git clone https://github.com/Ssttar/TechTrek.git
   ```
   http://localhost:5173
   ```
-
-### Building
-
-To create a production version of your app:
-
+5. To create a production version of your app:
 ```
 pnpm run build
 ```
+## License
+This project is under the AGPLv3 License - see the LICENSE file for details.
 
-You can preview the production build with `pnpm run preview`.
+## Author
+
+xingbest.fun © Star, Released under AGPLv3.Create on Nov 12, 2023
+> [Blog](https://www.xingbest.fun) · Github [@Star](https://github.com/Ssttar/)
