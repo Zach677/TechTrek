@@ -3,13 +3,21 @@
 ## Getting started
 
 1. clone this repository
-`git clone https://github.com/Ssttar/TechTrek.git`
+```bash
+git clone https://github.com/Ssttar/TechTrek.git
+```
 2. Install the dependencies 
- `pnpm install`
+ ```bash
+ pnpm install
+ ```
 3. start the server 
-  `pnpm run dev`
+  ```bash
+  pnpm run dev
+  ```
 4. open your website
-  `http://localhost:5173`
+  ```
+  http://localhost:5173
+  ```
 
 ### Building
 
