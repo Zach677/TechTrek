@@ -3,15 +3,15 @@
 ## Getting started
 
 1. clone this repository
-```bash
+```
 git clone https://github.com/Ssttar/TechTrek.git
 ```
 2. Install the dependencies 
- ```bash
+ ```
  pnpm install
  ```
 3. start the server 
-  ```bash
+  ```
   pnpm run dev
   ```
 4. open your website
@@ -23,7 +23,7 @@ git clone https://github.com/Ssttar/TechTrek.git
 
 To create a production version of your app:
 
-```bash
+```
 pnpm run build
 ```
 
