@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   export let title = 'Card Title'
   export let content =
     'This is the content of the card. You can add more details here.'
