@@ -11,7 +11,7 @@
   </div>
 </div>
 
-<style>
+<style lang="postcss">
   .center-container {
     display: flex;
     justify-content: center;

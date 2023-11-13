@@ -1,4 +1,5 @@
 <script>
+  import '../app.css'
   import Card from './Card.svelte'
 </script>
 
