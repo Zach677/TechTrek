@@ -10,7 +10,11 @@
   ],
   "packageRules": [
     {
+      "updateTypes": [
+        "major"
+      ],
       "labels": [
+        "UPDATE-MAJOR",
         "dependencies"
       ]
     }
