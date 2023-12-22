@@ -6,8 +6,8 @@ settings:
 
 devDependencies:
   '@sveltejs/adapter-node':
-    specifier: 2.0.0
-    version: 2.0.0(@sveltejs/kit@2.0.1)
+    specifier: 2.0.2
+    version: 2.0.2(@sveltejs/kit@2.0.1)
   '@sveltejs/adapter-vercel':
     specifier: ^4.0.0
     version: 4.0.2(@sveltejs/kit@2.0.1)
@@ -538,7 +538,7 @@ packages:
       rollup:
         optional: true
     dependencies:
-      '@rollup/pluginutils': 5.0.5(rollup@4.9.0)
+      '@rollup/pluginutils': 5.1.0(rollup@4.9.0)
       commondir: 1.0.1
       estree-walker: 2.0.2
       glob: 8.1.0
@@ -569,7 +569,7 @@ packages:
       rollup:
         optional: true
     dependencies:
-      '@rollup/pluginutils': 5.0.5(rollup@4.9.0)
+      '@rollup/pluginutils': 5.1.0(rollup@4.9.0)
       '@types/resolve': 1.20.2
       deepmerge: 4.3.1
       is-builtin-module: 3.2.1
@@ -584,21 +584,6 @@ packages:
     dependencies:
       estree-walker: 2.0.2
       picomatch: 2.3.1
-    dev: true
-
-  /@rollup/pluginutils@5.0.5(rollup@4.9.0):
-    resolution: {integrity: sha512-6aEYR910NyP73oHiJglti74iRyOwgFU4x3meH/H8OJx6Ry0j6cOVZ5X/wTvub7G7Ao6qaHBEaNsV3GLJkSsF+Q==}
-    engines: {node: '>=14.0.0'}
-    peerDependencies:
-      rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
-    peerDependenciesMeta:
-      rollup:
-        optional: true
-    dependencies:
-      '@types/estree': 1.0.5
-      estree-walker: 2.0.2
-      picomatch: 2.3.1
-      rollup: 4.9.0
     dev: true
 
   /@rollup/pluginutils@5.1.0(rollup@4.9.0):
@@ -816,8 +801,8 @@ packages:
     dev: true
     optional: true
 
-  /@sveltejs/adapter-node@2.0.0(@sveltejs/kit@2.0.1):
-    resolution: {integrity: sha512-js/FBTnwDhr111wCY7b+B30LD8uTUgegRVGG2q6xwzgU8qmj+8/V5E6f/kNmDbyBJH45V6tr8RTKsLvpNScK4g==}
+  /@sveltejs/adapter-node@2.0.2(@sveltejs/kit@2.0.1):
+    resolution: {integrity: sha512-iboANjLIB7Af74+og5IEQVSPsIfaO+o9zldU/7ljCGCrBj0t2gQlINtuwUhjvwhLgw9vHgICYWWZFxLM2C0zrg==}
     peerDependencies:
       '@sveltejs/kit': ^2.0.0
     dependencies:
