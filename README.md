@@ -12,24 +12,24 @@
 ## Getting started
 
 1. clone this repository
-```
+```bash
 git clone https://github.com/Ssttar/TechTrek.git
 ```
 2. Install the dependencies 
- ```
+ ```bash
  pnpm install
  ```
 3. start the server 
-  ```
-  pnpm run dev
+  ```bash
+ pnpm dev
   ```
 4. open your website
   ```
-  http://localhost:5173
+  http://localhost:3000
   ```
 5. To create a production version of your app:
-```
-pnpm run build
+```bash
+pnpm build
 ```
 ## License
 This project is under the AGPLv3 License - see the LICENSE file for details.
