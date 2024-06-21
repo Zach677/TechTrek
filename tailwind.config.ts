@@ -1,14 +1,13 @@
+import daysyui from 'daisyui'
 import type { Config } from 'tailwindcss'
 
-const config: Config = {
-  content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-  ],
+const twConfig: Config = {
+  content: ['./src/**/*.{js,ts,jsx,tsx}'],
+  darkMode: ['class', '[data-theme="dark"]'],
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [daysyui],
 }
 
-export default config
+export default twConfig
