@@ -10,6 +10,7 @@
     "url": "https://github.com/Ssttar/TechTrek.git"
   },
   "license": "MIT",
+  "private": false,
   "author": "Star <i@ssstttar.com>",
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -26,15 +27,12 @@
     "prepare": "bun run simple-git-hooks",
     "start": "bun run dev",
     "prebuild": "rimraf .next || exit 0",
-    "dev": "cross-env NODE_ENV=development next dev -p 2323",
-    "dev:turbo": "cross-env NODE_ENV=development next dev -p 2323 --turbo",
-    "analyze": "cross-env NODE_ENV=production ANALYZE=true BUNDLE_ANALYZE=browser next build",
+    "dev": "next dev -p 3500",
     "build": "cross-env NODE_ENV=production NODE_OPTIONS=--max_old_space_size=4096 next build",
     "build:ci": "cross-env NODE_ENV=production NODE_OPTIONS=--max_old_space_size=4096 NEXT_TELEMETRY_DISABLED=1 CI=true next build",
     "lint": "biome lint --apply src/**/*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json} --no-errors-on-unmatched"
   },
   "dependencies": {
-    "@heroicons/react": "^2.1.4",
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18"
@@ -43,7 +41,6 @@
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@innei/prettier": "^0.13.2",
-    "@lobehub/lint": "^1.23.4",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
