@@ -1,7 +1,7 @@
 name: Test CI
 
 on: 
-  [pull_request]
+  pull_request:
   workflow_dispatch:
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
         with:
           bun-version: ${{ secrets.BUN_VERSION }}
 
-      - name: Install deps
+      - name: Install dependencies
         run: bun i
 
       - name: Lint
