@@ -1,10 +1,9 @@
-import React from 'react'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
+import React from 'react';
+import AboutLayout from '../../components/layout/AboutLayout';
 
 const About: React.FC = () => (
   <div className="flex flex-col min-h-screen bg-gray-100">
-    <Header />
+    <AboutLayout>
     <main className="flex-grow container mx-auto p-4">
       <div className="bg-white shadow-lg rounded-lg p-6">
         <h2 className="text-4xl mb-4 font-semibold text-gray-800">关于我</h2>
@@ -13,8 +12,8 @@ const About: React.FC = () => (
         </p>
       </div>
     </main>
-    <Footer />
+    </AboutLayout>
   </div>
-)
+);
 
-export default About
+export default About;

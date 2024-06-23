@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const Header: React.FC = () => (
   <header className="bg-blue-600 p-4 text-white shadow-md">
@@ -14,6 +14,6 @@ const Header: React.FC = () => (
       </nav>
     </div>
   </header>
-)
+);
 
-export default Header
+export default Header;
