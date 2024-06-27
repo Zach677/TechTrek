@@ -1,10 +1,10 @@
 import React from 'react';
-import Layout from '../../components/layout/Layout';
-
+import Footer from '~/components/layout/footer/Footer';
+import Header from '~/components/layout/header/Header';
 
 const Home: React.FC = () => (
   <div className="flex flex-col min-h-screen bg-gray-100">
-    <Layout>
+    <Header />
     <main className="flex-grow container mx-auto p-4">
       <div className="bg-white shadow-lg rounded-lg p-6">
         <h2 className="text-4xl mb-4 font-semibold text-gray-800">欢迎来到我的个人主页</h2>
@@ -14,7 +14,7 @@ const Home: React.FC = () => (
         </button>
       </div>
     </main>
-    </Layout>
+    <Footer />
   </div>
 );
 
