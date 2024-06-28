@@ -1,7 +1,13 @@
+import { resolve } from 'node:path';
 import { defineConfig } from 'vitest/config';
+import react from '@vitejs/plugin-react'
 
 export default defineConfig({
+  plugins: [react()],
   test: {
+    alias: {
+      '~': resolve(__dirname, './src'),
+    },
     // coverage: {
     //   all: false,
     //   exclude: [
@@ -15,12 +21,14 @@ export default defineConfig({
     //   reporter: ['text', 'json', 'lcov', 'text-summary'],
     //   reportsDirectory: './coverage/app',
     // },
-    // deps: {
-    //   inline: ['vitest-canvas-mock'],
-    // },
+    deps: {
+      inline: ['vitest-canvas-mock'],
+    },
     environment: 'happy-dom',
     exclude: [
       '**/node_modules/**',
+      '**/dist/**',
+      '**/build/**',
     ],
     globals: true,
     setupFiles: './test/setup.ts',

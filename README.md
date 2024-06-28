@@ -11,7 +11,7 @@
 
 2024 © Star，本软件遵循 MIT 许可证
 
-部分代码参考自 GPT-4o 和 [Innei](https://github.com/Innei/Shiro)。
+部分代码和灵感参考自 GPT-4o 和 [Innei](https://github.com/Innei/Shiro) 和 [daidr](https://github.com/daidr/douLog)。
 
 感谢广大社区朋友们的贡献。
 
