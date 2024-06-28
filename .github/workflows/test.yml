@@ -1,13 +1,16 @@
 name: Test CI
 
-on: [push,pull_request]
+on: [push, pull_request]
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Install bun
         uses: oven-sh/setup-bun@v1
@@ -19,3 +22,6 @@ jobs:
 
       - name: Lint
         run: bun run lint
+
+      - name: run test
+        run: bun test

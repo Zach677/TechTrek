@@ -1,11 +1,10 @@
-import React from 'react';
-
-const Footer: React.FC = () => (
-  <footer className="bg-blue-600 p-4 text-white shadow-md w-full">
-    <div className="container mx-auto text-center">
-      <p>© 2023 我的个人主页. 版权所有.</p>
-    </div>
-  </footer>
-);
-
-export default Footer;
+// src/app/components/layout/footer/Footer.tsx
+export default function Footer() {
+  return (
+    <footer className="footer footer-center p-4 bg-base-300 text-base-content">
+      <div>
+        <p>Copyright © 2023 - All rights reserved by 我的个人主页</p>
+      </div>
+    </footer>
+  );
+}

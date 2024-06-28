@@ -1,19 +1,14 @@
-import React from 'react';
-import AboutLayout from '../../components/layout/AboutLayout';
-
-const About: React.FC = () => (
-  <div className="flex flex-col min-h-screen bg-gray-100">
-    <AboutLayout>
-    <main className="flex-grow container mx-auto p-4">
-      <div className="bg-white shadow-lg rounded-lg p-6">
-        <h2 className="text-4xl mb-4 font-semibold text-gray-800">关于我</h2>
-        <p className="text-gray-600">
-          这是关于页面，介绍了我的个人信息和背景。
-        </p>
-      </div>
-    </main>
-    </AboutLayout>
-  </div>
-);
-
-export default About;
+export default function About() {
+  return (
+    <div className="min-h-screen bg-gray-100">
+      <main className="container mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold text-center mb-8">关于我</h1>
+        <div className="bg-white shadow-md rounded-lg p-6">
+          <p className="text-gray-600 mb-4">
+            在这里，您可以添加更多关于您自己的详细信息，例如您的技能、经验和兴趣爱好。
+          </p>
+        </div>
+      </main>
+    </div>
+  );
+}

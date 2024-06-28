@@ -1,19 +1,22 @@
-import React from 'react';
+// src/app/components/layout/header/Header.tsx
+import Link from 'next/link';
 
-const Header: React.FC = () => (
-  <header className="bg-blue-600 p-4 text-white shadow-md">
-    <div className="container mx-auto flex items-center justify-between">
-      <h1 className="text-3xl font-bold">我的个人主页</h1>
-      <nav>
-        <a href="/" className="mx-2 text-lg hover:text-gray-200">
-          首页
-        </a>
-        <a href="/about" className="mx-2 text-lg hover:text-gray-200">
-          关于我
-        </a>
-      </nav>
-    </div>
-  </header>
-);
-
-export default Header;
+export default function Header() {
+  return (
+    <header className="bg-base-200">
+      <div className="navbar container mx-auto">
+        <div className="flex-1">
+          <Link href="/" className="btn btn-ghost normal-case text-xl">我的主页</Link>
+        </div>
+        <div className="flex-none">
+          <ul className="menu menu-horizontal px-1">
+            <li><Link href="/">首页</Link></li>
+            <li><Link href="/about">关于</Link></li>
+            <li><Link href="/projects">项目</Link></li>
+            <li><Link href="/blog">博客</Link></li>
+          </ul>
+        </div>
+      </div>
+    </header>
+  );
+}
