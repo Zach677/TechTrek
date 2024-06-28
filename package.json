@@ -29,8 +29,8 @@
     "prebuild": "rimraf .next || exit 0",
     "dev": "next dev -p 3500",
     "test": "vitest run --config vitest.config.ts",
-    "build": "cross-env NODE_ENV=production NODE_OPTIONS=--max_old_space_size=4096 next build",
-    "build:ci": "cross-env NODE_ENV=production NODE_OPTIONS=--max_old_space_size=4096 NEXT_TELEMETRY_DISABLED=1 CI=true next build",
+    "build": "NODE_ENV=production NODE_OPTIONS=--max_old_space_size=4096 next build",
+    "build:ci": "NODE_ENV=production NODE_OPTIONS=--max_old_space_size=4096 NEXT_TELEMETRY_DISABLED=1 CI=true next build",
     "lint": "biome lint --apply src/**/*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json} --no-errors-on-unmatched"
   },
   "dependencies": {
@@ -65,6 +65,7 @@
     "lint-staged": "^15.2.7",
     "postcss": "^8",
     "prettier": "^3.3.2",
+    "rimraf": "^5.0.7",
     "simple-git-hooks": "^2.11.1",
     "tailwind-scrollbar": "^3.1.0",
     "tailwindcss": "^3.4.1",
