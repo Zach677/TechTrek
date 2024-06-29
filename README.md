@@ -3,9 +3,9 @@
 ## :wrench: 技术栈
 
 - NextJS (App Router)
-- Framer motion
-<!-- - Radix UI -->
 - TailwindCSS
+<!-- - Framer motion -->
+<!-- - Radix UI -->
 
 ## :heart: 鸣谢 & 许可
 
