@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
-import Layout from '~/components/layout/Layout';
-import '~/styles/globals.css';
+
+import Layout from '~/components/layout/Layout'
+
+import '~/styles/index.css'
 
 export const metadata: Metadata = {
   title: 'TechTrek',
@@ -11,7 +13,7 @@ export const metadata: Metadata = {
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
-  }
+  },
 }
 
 export default function RootLayout({
@@ -25,5 +27,5 @@ export default function RootLayout({
         <Layout>{children}</Layout>
       </body>
     </html>
-  );
+  )
 }
