@@ -24,7 +24,7 @@ const Tag = ({ href, children }: TagProps) => (
 
 export default function Card({ children }: CardProps) {
   return (
-    <div className="mx-auto flex h-[400px] max-w-md flex-col items-center justify-between rounded-lg bg-base-100 p-8 shadow-lg">
+    <div className="mx-auto flex h-[380px] max-w-md flex-col items-center justify-between rounded-lg bg-base-100 p-8 shadow-lg">
       <div className="flex w-full flex-col items-center">
         <div className="mb-6 flex flex-wrap justify-center gap-3">
           <Tag href="/">我</Tag>

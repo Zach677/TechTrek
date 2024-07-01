@@ -1,7 +1,9 @@
 'use client'
 
 /* eslint-disable react/jsx-key */
+import { url } from 'inspector'
 import React from 'react'
+import { color } from 'framer-motion'
 import Link from 'next/link'
 
 import { XIcon } from '~/components/icons/platform/XIcon'
@@ -24,6 +26,12 @@ const iconSet = [
     icon: <span className="icon-[mingcute--mail-line]" />,
     color: '#D44638',
     url: 'mailto:i@ssstttar.com',
+  },
+  {
+    name: 'RSS',
+    icon: <span className="icon-[mingcute--rss-line]" />,
+    color: '#FFA500',
+    url: '/feed',
   },
 ]
 
