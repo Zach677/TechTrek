@@ -22,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="zh">
+    <html lang="zh-CN">
       <body>
         <Layout>{children}</Layout>
       </body>
