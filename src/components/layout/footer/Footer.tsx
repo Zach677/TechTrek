@@ -16,7 +16,14 @@ export default function Footer() {
       <span className="text-lg">
         © {currentYear}{' '}
         <StyledLink href="https://ssstttar.com" target="_blank">
-          STAR'S HOME
+          <span className="font-medium">STAR'S HOME</span>
+        </StyledLink>
+      </span>
+      <br />
+      <span className="text-lg">
+        Power by{' '}
+        <StyledLink href="https://github.com/Ssttar/TechTrek" target="_blank">
+          <span className="font-medium">TechTrek</span>
         </StyledLink>
       </span>
     </footer>
