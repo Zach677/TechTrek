@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import Layout from '~/components/layout/Layout'
+import Root from '~/components/layout/root/Root'
 
 import '~/styles/index.css'
 
@@ -24,7 +24,9 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <body>
-        <Layout>{children}</Layout>
+        <div data-theme>
+          <Root>{children}</Root>
+        </div>
       </body>
     </html>
   )

@@ -4,7 +4,7 @@
 
 - NextJS (App Router)
 - TailwindCSS
-<!-- - Framer motion -->
+- Framer motion
 <!-- - Radix UI -->
 
 ## :heart: 鸣谢 & 许可
