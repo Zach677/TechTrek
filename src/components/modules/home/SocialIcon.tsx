@@ -1,57 +1,83 @@
-'use client'
-
 /* eslint-disable react/jsx-key */
-import React, { memo } from 'react'
-import Link from 'next/link'
+import { memo, useMemo } from 'react'
+import type { ReactNode } from 'react'
 
 import { XIcon } from '~/components/icons/platform/XIcon'
+import { MotionButtonBase } from '~/components/ui/button'
+import { FloatPopover } from '~/components/ui/float-popover'
 
-const iconSet = [
-  {
-    name: 'Github',
-    icon: <i className="icon-[mingcute--github-line]" />,
-    color: '#181717',
-    url: 'https://github.com/Ssttar',
-  },
-  {
-    name: 'X',
-    icon: <XIcon />,
-    color: 'rgba(36,46,54,1.00)',
-    url: 'https://x.com/Ssttar123',
-  },
-  {
-    name: 'Email',
-    icon: <i className="icon-[mingcute--mail-line]" />,
-    color: '#D44638',
-    url: 'mailto:i@ssstttar.com',
-  },
-  {
-    name: 'RSS',
-    icon: <i className="icon-[mingcute--rss-line]" />,
-    color: '#FFA500',
-    url: '/feed',
-  },
-]
-
-export const SocialIcon = () => {
-  return (
-    <>
-      {iconSet.map((item) => (
-        <Link
-          key={item.name}
-          href={item.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex h-10 w-10 items-center justify-center rounded-full transition-transform hover:scale-110"
-          style={{ backgroundColor: item.color }}
-        >
-          {React.isValidElement(item.icon)
-            ? React.cloneElement(item.icon as React.ReactElement, {
-                className: `h-5 w-5 text-white ${(item.icon as React.ReactElement).props.className || ''}`,
-              })
-            : item.icon}
-        </Link>
-      ))}
-    </>
-  )
+interface SocialIconProps {
+  type: string
+  id: string
 }
+
+const iconSet: Record<
+  string,
+  [string, ReactNode, string, (id: string) => string]
+> = {
+  github: [
+    'Github',
+    <i className="icon-[mingcute--github-line]" />,
+    '#181717',
+    (id) => `https://github.com/${id}`,
+  ],
+  x: ['x', <XIcon />, 'rgba(36,46,54,1.00)', (id) => `https://x.com/${id}`],
+  mail: [
+    'Email',
+    <i className="icon-[mingcute--mail-line]" />,
+    '#D44638',
+    (id) => `mailto:${id}`,
+  ],
+  get email() {
+    return this.mail
+  },
+  get feed() {
+    return this.rss
+  },
+  rss: [
+    'RSS',
+    <i className="icon-[mingcute--rss-line]" />,
+    '#FFA500',
+    (id) => id,
+  ],
+}
+const icons = Object.keys(iconSet)
+
+export const isSupportIcon = (icon: string) => icons.includes(icon)
+export const SocialIcon = memo((props: SocialIconProps) => {
+  const { id, type } = props
+
+  const [name, Icon, iconBg, hrefFn] = useMemo(() => {
+    const [name, Icon, iconBg, hrefFn] = (iconSet as any)[type as any] || []
+    return [name, Icon, iconBg, hrefFn]
+  }, [type])
+
+  if (!name) return null
+  const href = hrefFn(id)
+
+  return (
+    <FloatPopover
+      type="tooltip"
+      triggerElement={
+        <MotionButtonBase
+          className="flex aspect-square size-10 rounded-full text-2xl text-white center"
+          style={{
+            background: iconBg,
+          }}
+        >
+          <a
+            target="_blank"
+            href={href}
+            className="flex center"
+            rel="noreferrer"
+          >
+            {Icon}
+          </a>
+        </MotionButtonBase>
+      }
+    >
+      {name}
+    </FloatPopover>
+  )
+})
+SocialIcon.displayName = 'SocialIcon'

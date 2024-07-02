@@ -46,7 +46,9 @@ export const Card: Component = ({ children }) => {
       </div>
 
       <div className="flex justify-center space-x-4">
-        <SocialIcon />
+        <SocialIcon type="github" id="Ssttar" />
+        <SocialIcon type="x" id="Ssttar123" />
+        <SocialIcon type="mail" id="i@ssstttar.com" />
       </div>
       {children}
     </div>
