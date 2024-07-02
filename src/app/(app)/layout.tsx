@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 
-import Root from '~/components/layout/root/Root'
-
-import '~/styles/index.css'
+import { Root } from '~/components/layout/root/Root'
 
 export const metadata: Metadata = {
   title: 'TechTrek',
