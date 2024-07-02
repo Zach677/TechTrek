@@ -4,10 +4,6 @@ import Link from 'next/link'
 
 import { SocialIcon } from '~/components/modules/home/SocialIcon'
 
-interface CardProps {
-  children?: ReactNode
-}
-
 interface TagProps {
   href: string
   children: ReactNode
@@ -22,7 +18,7 @@ const Tag = ({ href, children }: TagProps) => (
   </Link>
 )
 
-export default function Card({ children }: CardProps) {
+export const Card: Component = ({ children }) => {
   return (
     <div className="mx-auto flex h-[380px] max-w-md flex-col items-center justify-between rounded-lg bg-base-100 p-8 shadow-lg">
       <div className="flex w-full flex-col items-center">

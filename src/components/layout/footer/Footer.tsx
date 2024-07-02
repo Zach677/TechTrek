@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import type { JSX } from 'react'
 
-export default function Footer() {
+export const Footer = () => {
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
 
   useEffect(() => {

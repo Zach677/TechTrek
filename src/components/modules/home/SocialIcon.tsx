@@ -1,9 +1,7 @@
 'use client'
 
 /* eslint-disable react/jsx-key */
-import { url } from 'inspector'
-import React from 'react'
-import { color } from 'framer-motion'
+import React, { memo } from 'react'
 import Link from 'next/link'
 
 import { XIcon } from '~/components/icons/platform/XIcon'
@@ -11,7 +9,7 @@ import { XIcon } from '~/components/icons/platform/XIcon'
 const iconSet = [
   {
     name: 'Github',
-    icon: <span className="icon-[mingcute--github-line]" />,
+    icon: <i className="icon-[mingcute--github-line]" />,
     color: '#181717',
     url: 'https://github.com/Ssttar',
   },
@@ -23,19 +21,19 @@ const iconSet = [
   },
   {
     name: 'Email',
-    icon: <span className="icon-[mingcute--mail-line]" />,
+    icon: <i className="icon-[mingcute--mail-line]" />,
     color: '#D44638',
     url: 'mailto:i@ssstttar.com',
   },
   {
     name: 'RSS',
-    icon: <span className="icon-[mingcute--rss-line]" />,
+    icon: <i className="icon-[mingcute--rss-line]" />,
     color: '#FFA500',
     url: '/feed',
   },
 ]
 
-export const SocialIcon: React.FC = () => {
+export const SocialIcon = () => {
   return (
     <>
       {iconSet.map((item) => (

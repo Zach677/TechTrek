@@ -1,6 +1,6 @@
-import Footer from '../footer/Footer'
+import { Footer } from '../footer/Footer'
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export const Root: Component = ({ children }) => {
   return (
     <div className="flex min-h-screen flex-col bg-base-200">
       <main className="flex flex-grow items-center justify-center px-4 py-12">
