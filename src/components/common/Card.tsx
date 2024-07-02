@@ -45,7 +45,7 @@ export const Card: Component = ({ children }) => {
         </p>
       </div>
 
-      <ul className="mt-8 flex flex-wrap gap-4 center lg:mx-auto lg:mt-5 lg:justify-start">
+      <ul className="mx-[60px] mt-8 flex flex-wrap gap-4 center lg:mx-auto lg:mt-5 lg:justify-start">
         <SocialIcon type="github" id="Ssttar" />
         <SocialIcon type="x" id="Ssttar123" />
         <SocialIcon type="mail" id="i@ssstttar.com" />
