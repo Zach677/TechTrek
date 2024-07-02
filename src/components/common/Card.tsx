@@ -45,11 +45,12 @@ export const Card: Component = ({ children }) => {
         </p>
       </div>
 
-      <div className="flex justify-center space-x-4">
+      <ul className="mt-8 flex flex-wrap gap-4 center lg:mx-auto lg:mt-5 lg:justify-start">
         <SocialIcon type="github" id="Ssttar" />
         <SocialIcon type="x" id="Ssttar123" />
         <SocialIcon type="mail" id="i@ssstttar.com" />
-      </div>
+        <SocialIcon type="rss" id="https://ssstttar.com/feed" />
+      </ul>
       {children}
     </div>
   )
