@@ -49,7 +49,7 @@ export const SocialIcon: React.FC = () => {
         >
           {React.isValidElement(item.icon)
             ? React.cloneElement(item.icon as React.ReactElement, {
-                className: `h-5 w-5 ${(item.icon as React.ReactElement).props.className || ''}`,
+                className: `h-5 w-5 text-white ${(item.icon as React.ReactElement).props.className || ''}`,
               })
             : item.icon}
         </Link>
