@@ -48,7 +48,7 @@
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@floating-ui/react-dom": "^2.1.1",
-    "@iconify-json/material-symbols": "^1.1.82",
+    "@iconify-json/material-symbols": "^1.1.83",
     "@iconify-json/mingcute": "^1.1.18",
     "@iconify/tailwind": "^1.1.1",
     "@innei/prettier": "^0.13.2",
