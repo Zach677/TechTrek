@@ -18,6 +18,9 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": ".",
+    "types": [
+      "vitest/globals"
+    ],
     "incremental": true,
     "plugins": [
       {
