@@ -3,8 +3,6 @@ import { memo, useMemo } from 'react'
 import type { ReactNode } from 'react'
 
 import { XIcon } from '~/components/icons/platform/XIcon'
-import { MotionButtonBase } from '~/components/ui/button'
-import { FloatPopover } from '~/components/ui/float-popover'
 
 interface SocialIconProps {
   type: string
@@ -55,29 +53,21 @@ export const SocialIcon = memo((props: SocialIconProps) => {
   if (!name) return null
   const href = hrefFn(id)
 
+  // TODO add Pop-up animation
   return (
-    <FloatPopover
-      type="tooltip"
-      triggerElement={
-        <MotionButtonBase
-          className="flex aspect-square size-10 rounded-full text-2xl text-white center"
-          style={{
-            background: iconBg,
-          }}
-        >
-          <a
-            target="_blank"
-            href={href}
-            className="flex center"
-            rel="noreferrer"
-          >
-            {Icon}
-          </a>
-        </MotionButtonBase>
-      }
-    >
-      {name}
-    </FloatPopover>
+    <div title={name}>
+      <a
+        target="_blank"
+        href={href}
+        className="flex aspect-square h-10 w-10 items-center justify-center rounded-full text-2xl text-white"
+        style={{
+          background: iconBg,
+        }}
+        rel="noreferrer"
+      >
+        {Icon}
+      </a>
+    </div>
   )
 })
 SocialIcon.displayName = 'SocialIcon'

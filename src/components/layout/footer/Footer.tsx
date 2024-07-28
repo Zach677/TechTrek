@@ -10,42 +10,22 @@ export const Footer = () => {
   useEffect(() => {
     setCurrentYear(new Date().getFullYear())
   }, [])
-
+  // TODO add style link
   return (
     <footer className="py-8 text-center text-gray-400">
       <span className="text-lg">
         © {currentYear}{' '}
-        <StyledLink href="https://ssstttar.com" target="_blank">
+        <a href="https://ssstttar.com" target="_blank">
           <span className="font-medium">STAR'S HOME</span>
-        </StyledLink>
+        </a>
       </span>
       <br />
       <span className="text-lg">
         Power by{' '}
-        <StyledLink href="https://github.com/Ssttar/TechTrek" target="_blank">
+        <a href="https://github.com/Ssttar/TechTrek" target="_blank">
           <span className="font-medium">TechTrek</span>
-        </StyledLink>
+        </a>
       </span>
     </footer>
-  )
-}
-
-const StyledLink = (
-  props: JSX.IntrinsicElements['a'] & {
-    external?: boolean
-  },
-) => {
-  const { external, ...rest } = props
-  const As = external ? 'a' : Link
-
-  return (
-    // @ts-ignore
-    <As
-      className="shiro-link--underline"
-      target={props.external ? '_blank' : props.target}
-      {...rest}
-    >
-      {props.children}
-    </As>
   )
 }
