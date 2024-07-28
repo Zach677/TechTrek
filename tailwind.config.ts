@@ -45,8 +45,8 @@ const config: Config = {
       {
         light: {
           'color-scheme': 'light',
-          // 浅葱
-          primary: '#33A6B8',
+
+          primary: '#32ADE6',
 
           'base-100': '#fff',
         },
@@ -54,8 +54,8 @@ const config: Config = {
       {
         dark: {
           'color-scheme': 'dark',
-          // 桃
-          primary: '#F596AA',
+
+          primary: '#64D2FF',
 
           'base-100': '#1C1C1E',
         },
