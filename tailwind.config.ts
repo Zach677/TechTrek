@@ -10,6 +10,25 @@ const config: Config = {
   darkMode: ['class', '[data-theme="dark"]'],
   theme: {
     extend: {
+      animation: {
+        blob: 'blob 7s infinite',
+      },
+      keyframes: {
+        blob: {
+          '0%': {
+            transform: 'translate(0px, 0px) scale(1)',
+          },
+          '33%': {
+            transform: 'translate(30px, -50px) scale(1.1)',
+          },
+          '66%': {
+            transform: 'translate(-20px, 20px) scale(0.9)',
+          },
+          '100%': {
+            transform: 'tranlate(0px, 0px) scale(1)',
+          },
+        },
+      },
       fontFamily: {
         sans: 'var(--font-sans),system-ui,-apple-system,PingFang SC,"Microsoft YaHei",Segoe UI,Roboto,Helvetica,noto sans sc,hiragino sans gb,"sans-serif",Apple Color Emoji,Segoe UI Emoji,Not Color Emoji',
         serif:
@@ -28,9 +47,7 @@ const config: Config = {
           // 浅葱
           primary: '#33A6B8',
 
-          secondary: '#A8D8B9',
-
-          accent: '#33A6B8',
+          'base-100': '#fff',
         },
       },
       {
@@ -38,9 +55,8 @@ const config: Config = {
           'color-scheme': 'dark',
           // 桃
           primary: '#F596AA',
-          // 洗朱
-          secondary: '#FB966E',
-          accent: '#F596AA',
+
+          'base-100': '#1C1C1E',
         },
       },
     ],

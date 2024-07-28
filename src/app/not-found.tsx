@@ -1,17 +1,13 @@
 /* eslint-disable react/display-name */
 import { NotFound404 } from '~/components/common/404'
-import { StyledButton } from '~/components/ui/button'
 
+// TODO button style optimization
 export default () => {
   return (
     <html>
-      <body className={`m-0 h-full p-0 font-sans`}>
+      <body className="m-0 h-full bg-gradient-to-r from-blue-100 to-purple-100 p-0 font-sans">
         <div data-theme>
-          <NotFound404>
-            <StyledButton>
-              <a href="/">返回首页</a>
-            </StyledButton>
-          </NotFound404>
+          <NotFound404 />
         </div>
       </body>
     </html>
