@@ -32,16 +32,19 @@ export const AnimatedTag: React.FC<TagProps> = ({ href, children }) => {
         />
         <motion.span
           animate={{
-            color: isHovered ? '#32ADE6' : '#4a4a4a',
+            color: isHovered ? '#ffffff' : '#b0b0b0',
           }}
         >
           {children}
         </motion.span>
         <motion.div
-          className="absolute bottom-0 left-0 h-[2px] bg-[#ff6b6b]"
-          initial={{ width: '0%' }}
-          animate={{ width: isHovered ? '100%' : '0%' }}
-          transition={{ duration: 0.3 }}
+          className="absolute bottom-0 left-0 h-[2px] w-full"
+          animate={{
+            backgroundColor: isHovered
+              ? 'rgba(74, 144, 226, 0)'
+              : 'rgba(74, 144, 226, 0.3)',
+            opacity: isHovered ? 0 : 1,
+          }}
         />
       </Link>
     </motion.div>
