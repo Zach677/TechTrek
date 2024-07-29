@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --primary-color: #32ade6;
+  --text-color: #b0b0b0;
+}
+
+[data-theme='dark'] {
+  --primary-color: #64d2ff;
+  --text-color: #b0b0b0;
+}

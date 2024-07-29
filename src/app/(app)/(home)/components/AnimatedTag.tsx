@@ -20,31 +20,33 @@ export const AnimatedTag: React.FC<TagProps> = ({ href, children }) => {
     >
       <Link
         href={href}
-        className="relative inline-block px-4 py-2 text-sm transition-colors duration-300"
+        className="relative inline-block px-4 py-2 text-sm font-medium transition-all duration-300"
       >
         <motion.div
           className="absolute inset-0 rounded-full"
           animate={{
             backgroundColor: isHovered
-              ? 'rgba(255,255,255,0.1)'
+              ? 'rgba(50, 173, 230, 0.1)'
               : 'rgba(255,255,255,0)',
           }}
+          transition={{ duration: 0.2 }}
         />
         <motion.span
           animate={{
-            color: isHovered ? '#ffffff' : '#b0b0b0',
+            color: isHovered ? 'var(--primary-color)' : 'var(--text-color)',
           }}
+          transition={{ duration: 0.2 }}
+          className="relative z-10"
         >
           {children}
         </motion.span>
         <motion.div
-          className="absolute bottom-0 left-0 h-[2px] w-full"
+          className="absolute bottom-0 left-0 h-[2px] w-0"
           animate={{
-            backgroundColor: isHovered
-              ? 'rgba(74, 144, 226, 0)'
-              : 'rgba(74, 144, 226, 0.3)',
-            opacity: isHovered ? 0 : 1,
+            width: isHovered ? '100%' : '0%',
+            backgroundColor: 'var(--primary-color)',
           }}
+          transition={{ duration: 0.3 }}
         />
       </Link>
     </motion.div>
