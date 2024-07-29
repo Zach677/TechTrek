@@ -1,3 +1,4 @@
+// https://github.com/Innei/Shiro/blob/main/src/components/modules/home/SocialIcon.tsx
 /* eslint-disable react/jsx-key */
 import { memo, useMemo } from 'react'
 import type { ReactNode } from 'react'

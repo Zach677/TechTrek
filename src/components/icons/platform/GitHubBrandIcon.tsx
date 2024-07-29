@@ -1,3 +1,4 @@
+// https://github.com/Innei/Shiro/blob/main/src/components/icons/platform/GitHubBrandIcon.tsx
 export function GitHubBrandIcon(props: React.SVGAttributes<SVGElement>) {
   return (
     <svg

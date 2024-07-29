@@ -1,3 +1,4 @@
+// https://github.com/Innei/Shiro/blob/main/src/components/icons/platform/XIcon.tsx
 export function XIcon(props: React.SVGAttributes<SVGElement>) {
   return (
     <svg

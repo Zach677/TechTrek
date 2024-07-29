@@ -1,3 +1,4 @@
+// https://github.com/Innei/Shiro/blob/main/src/app/InitInClient.ts
 'use client'
 
 import { useEffect } from 'react'
