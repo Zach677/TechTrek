@@ -86,7 +86,7 @@ export const Card: React.FC<{ children?: ReactNode }> = ({ children }) => {
           return (
             <motion.li
               key={type}
-              whileHover={{ scale: 1.2, rotate: 10 }}
+              whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.8 }}
             >
               <SocialIcon id={id} type={type} />
