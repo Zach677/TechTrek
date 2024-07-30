@@ -1,8 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Link from 'next/link'
-import type { JSX } from 'react'
+import { motion } from 'framer-motion'
 
 export const Footer = () => {
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
@@ -13,19 +12,37 @@ export const Footer = () => {
   // TODO add style link
   return (
     <footer className="py-8 text-center text-gray-400">
-      <span className="text-lg">
+      <motion.span
+        className="inline-block text-lg"
+        whileHover={{ scale: 1.05 }}
+      >
         © {currentYear}{' '}
-        <a href="https://ssstttar.com" target="_blank">
-          <span className="font-medium">STAR'S HOME</span>
+        <a
+          href="https://ssstttar.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative font-medium text-gray-600"
+        >
+          STAR'S HOME
+          <span className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 transform bg-gradient-to-r from-primary to-secondary transition-transform duration-300 group-hover:scale-x-100"></span>
         </a>
-      </span>
+      </motion.span>
       <br />
-      <span className="text-lg">
-        Power by{' '}
-        <a href="https://github.com/Ssttar/TechTrek" target="_blank">
-          <span className="font-medium">TechTrek</span>
+      <motion.span
+        className="mt-1 inline-block text-lg"
+        whileHover={{ scale: 1.05 }}
+      >
+        Powered by{' '}
+        <a
+          href="https://github.com/Ssttar/TechTrek"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group relative font-medium text-gray-600"
+        >
+          TechTrek
+          <span className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 transform bg-gradient-to-r from-primary to-secondary transition-transform duration-300 group-hover:scale-x-100"></span>
         </a>
-      </span>
+      </motion.span>
     </footer>
   )
 }

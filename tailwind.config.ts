@@ -48,6 +48,8 @@ const config: Config = {
 
           primary: '#32ADE6',
 
+          secondary: '#AF52DE',
+
           'base-100': '#fff',
         },
       },
@@ -56,6 +58,8 @@ const config: Config = {
           'color-scheme': 'dark',
 
           primary: '#64D2FF',
+
+          secondary: '#BF5AF2',
 
           'base-100': '#1C1C1E',
         },
