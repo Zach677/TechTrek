@@ -101,7 +101,7 @@ export const Card: React.FC<{ children?: ReactNode }> = ({ children }) => {
 
 const socialConfig = {
   x: 'Ssttar123',
-  github: 'Ssttar',
+  github: 'Zach677',
   rss: 'https://ssstttar.com/feed',
   mail: 'i@ssstttar.com',
   // 添加其他社交媒体
