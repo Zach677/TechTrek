@@ -2,7 +2,12 @@ import { ReactNode, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 
-import { isSupportIcon, SocialIcon } from '~/components/modules/home/SocialIcon'
+import { HoverTooltip } from '~/components/common/HoverTooltip'
+import {
+  getSocialIconName,
+  isSupportIcon,
+  SocialIcon,
+} from '~/components/modules/home/SocialIcon'
 
 import { AnimatedTag } from './AnimatedTag'
 
@@ -89,7 +94,9 @@ export const Card: React.FC<{ children?: ReactNode }> = ({ children }) => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.8 }}
             >
-              <SocialIcon id={id} type={type} />
+              <HoverTooltip tooltipText={getSocialIconName(type)}>
+                <SocialIcon id={id} type={type} />
+              </HoverTooltip>
             </motion.li>
           )
         })}
@@ -103,6 +110,6 @@ const socialConfig = {
   x: 'Zach98899',
   github: 'Zach677',
   rss: 'https://ssstttar.com/feed',
-  mail: 'i@ssstttar.com',
+  email: 'i@ssstttar.com',
   // 添加其他社交媒体
 }

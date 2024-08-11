@@ -43,6 +43,9 @@ const iconSet: Record<
 const icons = Object.keys(iconSet)
 
 export const isSupportIcon = (icon: string) => icons.includes(icon)
+export const getSocialIconName = (type: string): string => {
+  return iconSet[type]?.[0] || type.charAt(0).toUpperCase() + type.slice(1)
+}
 export const SocialIcon = memo((props: SocialIconProps) => {
   const { id, type } = props
 
