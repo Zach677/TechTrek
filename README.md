@@ -1,5 +1,8 @@
 # TechTrek
 
+> [!IMPORTANT]
+> The Blog page is early version, not use with production
+
 ## :wrench: Stack
 
 - NextJS (App Router)
