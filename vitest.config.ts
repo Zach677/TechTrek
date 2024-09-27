@@ -1,6 +1,6 @@
-import { resolve } from 'node:path';
-import { defineConfig } from 'vitest/config';
+import { resolve } from 'node:path'
 import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   plugins: [react()],
@@ -25,12 +25,8 @@ export default defineConfig({
       inline: ['vitest-canvas-mock'],
     },
     environment: 'happy-dom',
-    exclude: [
-      '**/node_modules/**',
-      '**/dist/**',
-      '**/build/**',
-    ],
+    exclude: ['**/node_modules/**', '**/dist/**', '**/build/**'],
     globals: true,
     setupFiles: './test/setup.ts',
   },
-});
+})

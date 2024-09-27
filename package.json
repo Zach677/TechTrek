@@ -13,8 +13,8 @@
   "private": false,
   "author": "Star <i@ssstttar.com>",
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "prettier --ignore-path ./.gitignore --write "
+    "*.{js,jsx,ts,tsx,json}": [
+      "prettier --write "
     ],
     "*.{js,ts,cjs,mjs,jsx,tsx,json}": [
       "biome lint --apply --no-errors-on-unmatched"
