@@ -1,8 +1,5 @@
 # TechTrek
 
-> [!IMPORTANT]
-> TechTrek is currently in development and not yet recommended for production use, however you can take part in improving our project!
-
 ## :wrench: Stack
 
 - NextJS (App Router)
