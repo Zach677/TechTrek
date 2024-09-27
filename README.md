@@ -1,7 +1,7 @@
 # TechTrek
 
 > [!IMPORTANT]
-> The Blog page is early version, not use with production
+> TechTrek is currently in development and not yet recommended for production use, however you can take part in improving our project!
 
 ## :wrench: Stack
 
