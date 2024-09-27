@@ -31,7 +31,9 @@
     "test": "vitest run --config vitest.config.ts",
     "build": "NODE_ENV=production NODE_OPTIONS=--max_old_space_size=4096 next build",
     "build:ci": "NODE_ENV=production NODE_OPTIONS=--max_old_space_size=4096 NEXT_TELEMETRY_DISABLED=1 CI=true next build",
-    "lint": "biome lint --apply src/**/*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json} --no-errors-on-unmatched"
+    "lint": "biome lint --apply src/**/*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json} --no-errors-on-unmatched",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.13",
