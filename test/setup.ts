@@ -1,5 +1,5 @@
 /* eslint-disable import/newline-after-import,import/first */
-import '@testing-library/jest-dom';
+import '@testing-library/jest-dom'
 
 // only inject in the dom environment
 if (
@@ -9,17 +9,16 @@ if (
   typeof (globalThis as any).EdgeRuntime !== 'string'
 ) {
   // test with canvas
-  await import('vitest-canvas-mock');
+  await import('vitest-canvas-mock')
 }
 
 // node runtime
 if (typeof window === 'undefined') {
   // test with polyfill crypto
-  const { Crypto } = await import('@peculiar/webcrypto');
+  const { Crypto } = await import('@peculiar/webcrypto')
 
   Object.defineProperty(global, 'crypto', {
     value: new Crypto(),
     writable: true,
-  });
+  })
 }
-

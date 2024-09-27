@@ -25,22 +25,46 @@ export const Card: React.FC<{ children?: ReactNode }> = ({ children }) => {
     typeText()
   }, [])
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        when: 'beforeChildren',
+        staggerChildren: 0.1,
+      },
+    },
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  }
+
   return (
     <motion.div
-      initial={{ y: 20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
       className="mx-auto flex min-h-[380px] max-w-md flex-col items-center justify-between rounded-lg bg-gradient-to-br from-base-100 to-base-200 p-6 shadow-lg transition-all duration-300 hover:shadow-xl sm:p-8"
     >
-      <div className="flex w-full flex-col items-center">
-        <nav className="mb-6 flex justify-center space-x-4">
+      <motion.div
+        variants={itemVariants}
+        className="flex w-full flex-col items-center"
+      >
+        <motion.nav
+          variants={itemVariants}
+          className="mb-6 flex justify-center space-x-4"
+        >
           <AnimatedTag href="/">我</AnimatedTag>
           <AnimatedTag href="/blog">文章</AnimatedTag>
           <AnimatedTag href="/friends">朋友们</AnimatedTag>
           <AnimatedTag href="/project">小项目</AnimatedTag>
-        </nav>
+        </motion.nav>
 
         <motion.div
+          variants={itemVariants}
           className="relative mb-8"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
@@ -63,28 +87,22 @@ export const Card: React.FC<{ children?: ReactNode }> = ({ children }) => {
           />
         </motion.div>
         <motion.h1
+          variants={itemVariants}
           className="mb-3 text-center text-2xl font-bold text-base-content"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
         >
           Star
         </motion.h1>
         <motion.p
+          variants={itemVariants}
           className="mb-8 text-center text-base text-base-content/80"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
         >
           {typedText}
         </motion.p>
-      </div>
+      </motion.div>
 
       <motion.ul
+        variants={itemVariants}
         className="mt-auto flex flex-wrap justify-center gap-4 lg:justify-start"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6 }}
       >
         {Object.entries(socialConfig).map(([type, id]) => {
           if (!isSupportIcon(type)) return null
