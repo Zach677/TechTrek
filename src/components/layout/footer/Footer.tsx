@@ -9,7 +9,7 @@ export const Footer = () => {
   useEffect(() => {
     setCurrentYear(new Date().getFullYear())
   }, [])
-  // TODO add style link
+
   return (
     <footer className="py-8 text-center text-gray-400">
       <motion.span

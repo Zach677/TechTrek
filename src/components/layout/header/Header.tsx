@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 
-export const Header: React.FC = () => {
+export const Header = () => {
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-white bg-opacity-80 backdrop-blur-md">
       <nav className="container mx-auto flex items-center justify-between p-4">
