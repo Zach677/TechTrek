@@ -18,7 +18,7 @@ export const Header: React.FC = () => {
               whileTap={{ scale: 0.95 }}
             >
               <Link
-                href={`/${item.toLowerCase()}`}
+                href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
                 className="text-gray-600 hover:text-gray-800"
               >
                 {item}
