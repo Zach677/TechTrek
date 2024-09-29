@@ -11,3 +11,7 @@
   --primary-color: #64d2ff;
   --text-color: #b0b0b0;
 }
+
+.fill-content {
+  min-height: calc(100vh - 17.5rem);
+}
