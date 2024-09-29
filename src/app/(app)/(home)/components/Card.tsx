@@ -59,7 +59,7 @@ export const Card: React.FC<{ children?: ReactNode }> = ({ children }) => {
           className="mb-6 flex justify-center space-x-4"
         >
           <AnimatedTag href="/">我</AnimatedTag>
-          <AnimatedTag href="/blog">文章</AnimatedTag>
+          <AnimatedTag href="/posts">文章</AnimatedTag>
           <AnimatedTag href="/friends">朋友们</AnimatedTag>
           <AnimatedTag href="/project">小项目</AnimatedTag>
         </motion.nav>
