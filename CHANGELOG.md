@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## 0.0.1-alpha.2 (2024-09-29)
+## [0.0.1-alpha.3](https://github.com/Zach677/TechTrek/compare/v0.0.1-alpha.1...v0.0.1-alpha.3) (2024-09-29)
+
+
+
+## [0.0.1-alpha.1](https://github.com/Zach677/TechTrek/compare/39f429d9cf158453734d1d0c31d03bbf20f86d8a...v0.0.1-alpha.1) (2024-09-29)
 
 
 ### Bug Fixes
