@@ -1,39 +1,26 @@
 {
   "name": "TechTrek",
-  "version": "0.0.1",
-  "homepage": "https://github.com/Ssttar/TechTrek",
-  "bugs": {
-    "url": "https://github.com/Ssttar/TechTrek/issues/new/choose"
-  },
+  "version": "0.0.1-alpha.1",
+  "private": false,
+  "packageManager": "pnpm@9.11.0",
+  "description": "My Simple Personal website",
+  "author": "Zach <i@ssstttar.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/Zach677/TechTrek",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Ssttar/TechTrek.git"
-  },
-  "license": "MIT",
-  "private": false,
-  "author": "Star <i@ssstttar.com>",
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx,json}": [
-      "prettier --write "
-    ],
-    "*.{js,ts,cjs,mjs,jsx,tsx,json}": [
-      "biome lint --apply --no-errors-on-unmatched"
-    ]
-  },
-  "simple-git-hooks": {
-    "pre-commit": "bun run lint-staged"
+    "url": "https://github.com/Zach677/TechTrek.git"
   },
   "scripts": {
-    "prepare": "bun run simple-git-hooks",
-    "start": "bun run dev",
-    "prebuild": "rimraf .next || exit 0",
-    "dev": "next dev -p 3500",
-    "test": "vitest run --config vitest.config.ts",
     "build": "NODE_ENV=production NODE_OPTIONS=--max_old_space_size=4096 next build",
     "build:ci": "NODE_ENV=production NODE_OPTIONS=--max_old_space_size=4096 NEXT_TELEMETRY_DISABLED=1 CI=true next build",
-    "lint": "biome lint --apply src/**/*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json} --no-errors-on-unmatched",
-    "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "bump": "vv",
+    "dev": "next dev -p 3500",
+    "lint": "eslint --fix",
+    "prebuild": "rimraf .next || exit 0",
+    "prepare": "pnpm exec simple-git-hooks",
+    "start": "npm run dev",
+    "test": "vitest run --config vitest.config.ts"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.15",
@@ -46,7 +33,6 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^19.5.0",
-    "framer-motion": "11.3.2",
     "@commitlint/config-conventional": "^19.5.0",
     "@floating-ui/react-dom": "^2.1.2",
     "@iconify-json/material-symbols": "^1.2.1",
@@ -62,13 +48,16 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.20",
-    "biome": "^0.3.3",
     "bypass-vue-devtools": "^0.0.6",
     "daisyui": "^4.12.10",
     "dayjs": "^1.11.13",
+    "eslint": "^9.11.1",
+    "eslint-config-hyoban": "^3.1.8",
+    "framer-motion": "11.3.2",
     "happy-dom": "^15.7.4",
     "jsdom": "^25.0.1",
     "lint-staged": "^15.2.10",
+    "nbump": "^2.0.4",
     "postcss": "^8.4.47",
     "prettier": "^3.3.3",
     "rimraf": "^6.0.1",
@@ -78,5 +67,30 @@
     "typescript": "5.6.2",
     "vitest": "^2.1.1",
     "vitest-canvas-mock": "^0.3.3"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm exec lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --ignore-path ./.gitignore --write "
+    ],
+    "*.{js,ts,cjs,mjs,jsx,tsx,json}": [
+      "eslint --fix"
+    ]
+  },
+  "bump": {
+    "before": [
+      "git pull --rebase"
+    ],
+    "after": [
+      "gh pr create --title 'chore: Release v${NEW_VERSION}' --body 'v${NEW_VERSION}' --base main --head dev"
+    ],
+    "commit_message": "chore(release): release v${NEW_VERSION}",
+    "tag": false,
+    "changelog": true,
+    "allowed_branches": [
+      "dev"
+    ]
   }
 }

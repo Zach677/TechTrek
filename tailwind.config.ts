@@ -1,8 +1,7 @@
-import daisyui from 'daisyui'
-import type { Config } from 'tailwindcss'
-
 import { addDynamicIconSelectors } from '@iconify/tailwind'
 import typography from '@tailwindcss/typography'
+import daisyui from 'daisyui'
+import type { Config } from 'tailwindcss'
 
 require('./cssAsPlugin')
 
