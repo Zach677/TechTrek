@@ -1,6 +1,6 @@
 {
   "name": "TechTrek",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.1-alpha.1",
   "private": false,
   "packageManager": "pnpm@9.11.0",
   "description": "My Simple Personal website",
