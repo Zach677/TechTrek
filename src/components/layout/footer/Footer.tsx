@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
 
 export const Footer = () => {
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
@@ -24,7 +24,7 @@ export const Footer = () => {
           className="group relative font-medium text-gray-600"
         >
           STAR'S HOME
-          <span className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 transform bg-gradient-to-r from-primary to-secondary transition-transform duration-300 group-hover:scale-x-100"></span>
+          <span className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 bg-gradient-to-r from-primary to-secondary transition-transform duration-300 group-hover:scale-x-100" />
         </a>
       </motion.span>
       <br />
@@ -40,7 +40,7 @@ export const Footer = () => {
           className="group relative font-medium text-gray-600"
         >
           TechTrek
-          <span className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 transform bg-gradient-to-r from-primary to-secondary transition-transform duration-300 group-hover:scale-x-100"></span>
+          <span className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 bg-gradient-to-r from-primary to-secondary transition-transform duration-300 group-hover:scale-x-100" />
         </a>
       </motion.span>
     </footer>

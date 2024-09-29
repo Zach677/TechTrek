@@ -1,6 +1,7 @@
-import React, { ReactNode, useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import type { ReactNode } from 'react'
+import React, { useState } from 'react'
 
 interface TagProps {
   href: string
