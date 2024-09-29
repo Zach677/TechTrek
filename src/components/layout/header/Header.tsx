@@ -5,9 +5,9 @@ import Link from 'next/link'
 
 export const Header = () => {
   return (
-    <header className="fixed inset-x-0 top-0 z-50 bg-white bg-opacity-80 backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-50 bg-base-100 backdrop-blur-md">
       <nav className="container mx-auto flex items-center justify-between p-4">
-        <Link href="/" className="text-2xl font-bold text-gray-800">
+        <Link href="/" className="text-2xl font-bold text-secondary">
           Zach's Home
         </Link>
         <ul className="flex space-x-6">
