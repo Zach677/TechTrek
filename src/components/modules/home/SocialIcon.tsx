@@ -1,7 +1,6 @@
 // https://github.com/Innei/Shiro/blob/main/src/components/modules/home/SocialIcon.tsx
-/* eslint-disable react/jsx-key */
-import { memo, useMemo } from 'react'
 import type { ReactNode } from 'react'
+import { memo, useMemo } from 'react'
 
 import { XIcon } from '~/components/icons/platform/XIcon'
 
@@ -63,7 +62,7 @@ export const SocialIcon = memo((props: SocialIconProps) => {
       <a
         target="_blank"
         href={href}
-        className="flex aspect-square h-10 w-10 items-center justify-center rounded-full text-2xl text-white"
+        className="flex aspect-square size-10 items-center justify-center rounded-full text-2xl text-white"
         style={{
           background: iconBg,
         }}

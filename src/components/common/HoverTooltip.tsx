@@ -1,5 +1,6 @@
-import React, { ReactNode } from 'react'
 import { motion } from 'framer-motion'
+import type { ReactNode } from 'react'
+import React from 'react'
 
 interface HoverTooltipProps {
   /** 要显示的内容 */
@@ -22,7 +23,7 @@ export const HoverTooltip: React.FC<HoverTooltipProps> = ({
       whileTap={{ scale: 0.9 }}
     >
       {children}
-      <span className="absolute left-0 right-0 top-full mt-1 text-center text-xs text-gray-400 opacity-0 transition-opacity group-hover:opacity-100">
+      <span className="absolute inset-x-0 top-full mt-1 text-center text-xs text-gray-400 opacity-0 transition-opacity group-hover:opacity-100">
         {tooltipText}
       </span>
     </motion.div>

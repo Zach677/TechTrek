@@ -1,6 +1,7 @@
-import { ReactNode, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import type { ReactNode } from 'react'
+import { useEffect, useState } from 'react'
 
 import { HoverTooltip } from '~/components/common/HoverTooltip'
 import {
