@@ -4,7 +4,7 @@ import { Root } from '~/components/layout/root/Root'
 
 export const metadata: Metadata = {
   title: 'TechTrek',
-  description: 'Happy Day',
+  description: 'Happy a good day!',
   icons: {
     icon: [
       { url: '/favicon.ico' },
@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <body>
-        <div data-theme>
+        <div id="root" data-theme>
           <Root>{children}</Root>
         </div>
       </body>

@@ -7,7 +7,7 @@ import { SocialMaps } from './components/SocialMaps'
 
 export default function Home() {
   return (
-    <div className="container mx-auto flex flex-col px-6 py-40">
+    <div className="container mx-auto px-6 py-20">
       <div className="mb-40 flex flex-col items-center space-y-8 md:flex-row md:items-start md:space-x-20 md:space-y-8">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -30,8 +30,8 @@ export default function Home() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="grow text-center md:text-left"
         >
-          <h1 className="mb-4 text-4xl font-bold text-gray-800">Zach</h1>
-          <p className="mb-6 text-xl text-gray-600">
+          <h1 className="my-3 text-4xl font-medium leading-loose">Zach</h1>
+          <p className="text-xl leading-loose">
             Hi, I'm Zach. I love coding and exploring new technologies. Welcome
             to my personal space where I share my thoughts and projects.
           </p>

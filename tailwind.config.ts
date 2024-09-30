@@ -5,6 +5,24 @@ import type { Config } from 'tailwindcss'
 
 require('./cssAsPlugin')
 
+const UIKitColors = {
+  // Label
+  label: {
+    primary: {
+      dark: '#FFF',
+      light: '#000',
+    },
+  },
+
+  // Background
+  background: {
+    primary: {
+      light: '#fff',
+      dark: '#1C1C1E',
+    },
+  },
+}
+
 const config: Config = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   darkMode: ['class', '[data-theme="dark"]'],
@@ -45,22 +63,24 @@ const config: Config = {
         light: {
           'color-scheme': 'light',
 
-          primary: '#32ADE6',
+          primary: '#33A6B8',
 
-          secondary: '#AF52DE',
+          secondary: '#A8D8B9',
 
-          'base-100': '#fff',
+          'base-100': UIKitColors.background.primary.light,
+          'base-content': UIKitColors.label.primary.light,
         },
       },
       {
         dark: {
           'color-scheme': 'dark',
 
-          primary: '#64D2FF',
+          primary: '#F596AA',
 
-          secondary: '#BF5AF2',
+          secondary: '#FB966E',
 
-          'base-100': '#1C1C1E',
+          'base-100': UIKitColors.background.primary.dark,
+          'base-content': UIKitColors.label.primary.dark,
         },
       },
     ],
