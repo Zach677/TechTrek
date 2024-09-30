@@ -1,6 +1,6 @@
 {
   "name": "TechTrek",
-  "version": "0.0.1-alpha.3",
+  "version": "0.0.1-alpha.4",
   "private": false,
   "packageManager": "pnpm@9.11.0",
   "description": "My Simple Personal website",
@@ -61,7 +61,7 @@
     "happy-dom": "^15.7.4",
     "jsdom": "^25.0.1",
     "lint-staged": "^15.2.10",
-    "nbump": "^2.0.4",
+    "nbump": "^2.0.7",
     "postcss": "^8.4.47",
     "prettier": "^3.3.3",
     "rimraf": "^6.0.1",

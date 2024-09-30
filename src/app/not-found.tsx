@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 import { NotFound404 } from '~/components/common/404'
 
 // TODO button style optimization

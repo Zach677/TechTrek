@@ -5,12 +5,12 @@ import Link from 'next/link'
 
 export const Header = () => {
   return (
-    <header className="fixed inset-x-0 top-0 z-50 bg-white bg-opacity-80 backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-50 backdrop-blur-md">
       <nav className="container mx-auto flex items-center justify-between p-4">
-        <Link href="/" className="text-2xl font-bold text-gray-800">
+        <Link href="/" className="text-2xl font-bold">
           Zach's Home
         </Link>
-        <ul className="flex space-x-6">
+        <ul className="flex space-x-6 px-4 font-medium">
           {['Home', 'Posts', 'Friends'].map((item) => (
             <motion.li
               key={item}
@@ -19,7 +19,7 @@ export const Header = () => {
             >
               <Link
                 href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
-                className="text-gray-600 hover:text-gray-800"
+                className="text-primary hover:text-secondary"
               >
                 {item}
               </Link>

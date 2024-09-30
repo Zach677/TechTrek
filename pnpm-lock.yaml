@@ -106,8 +106,8 @@ importers:
         specifier: ^15.2.10
         version: 15.2.10
       nbump:
-        specifier: ^2.0.4
-        version: 2.0.4(conventional-commits-filter@5.0.0)
+        specifier: ^2.0.7
+        version: 2.0.7(conventional-commits-filter@5.0.0)
       postcss:
         specifier: ^8.4.47
         version: 8.4.47
@@ -2637,8 +2637,8 @@ packages:
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
-  nbump@2.0.4:
-    resolution: {integrity: sha512-3Vdk4FmTcA7+6WeTM3oXOUGBF8xCWFLRhazRq1KDcCdjYMoLAQJ2aO5AaG5bKYoMP4qraZanorf10YWfiUCcDQ==}
+  nbump@2.0.7:
+    resolution: {integrity: sha512-BhHrnS1G21VMssWUU18SOHHwAFHUvIHUSdlDtX62SCoAc97GrE3bwtUUkWSPJA18fLndCMOB5PbMZoBumDl2/g==}
     hasBin: true
 
   neo-async@2.6.2:
@@ -6410,7 +6410,7 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  nbump@2.0.4(conventional-commits-filter@5.0.0):
+  nbump@2.0.7(conventional-commits-filter@5.0.0):
     dependencies:
       c12: 1.11.2
       conventional-changelog: 6.0.0(conventional-commits-filter@5.0.0)
