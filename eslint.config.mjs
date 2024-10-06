@@ -8,6 +8,7 @@ export default defineConfig(
     ignores: [],
     preferESM: false,
     react: 'next',
+    tailwindCSS: true,
   },
   {
     settings: {
@@ -22,6 +23,7 @@ export default defineConfig(
       'import/no-anonymous-default-export': 'off',
       eqeqeq: 'warn',
       'no-console': 'warn',
+      '@eslint-react/dom/no-missing-button-type': 0,
       'unicorn/prefer-math-trunc': 'off',
       'unicorn/prefer-dom-node-remove': 'off',
       '@typescript-eslint/no-unsafe-function-type': 'off',
@@ -49,6 +51,7 @@ export default defineConfig(
       'unicorn/no-anonymous-default-export': 0,
       'unicorn/no-magic-array-flat-depth': 1,
       'react-refresh/only-export-components': 0,
+      '@eslint-react/no-clone-element': 0,
     },
   },
 
