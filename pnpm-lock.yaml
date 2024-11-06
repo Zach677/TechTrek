@@ -97,8 +97,8 @@ importers:
         specifier: 11.3.2
         version: 11.3.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       happy-dom:
-        specifier: ^15.8.3
-        version: 15.8.3
+        specifier: ^15.10.1
+        version: 15.10.1
       jsdom:
         specifier: ^25.0.1
         version: 25.0.1
@@ -131,10 +131,10 @@ importers:
         version: 5.6.3
       vitest:
         specifier: ^2.1.4
-        version: 2.1.4(@types/node@20.17.6)(happy-dom@15.8.3)(jsdom@25.0.1)
+        version: 2.1.4(@types/node@20.17.6)(happy-dom@15.10.1)(jsdom@25.0.1)
       vitest-canvas-mock:
         specifier: ^0.3.3
-        version: 0.3.3(vitest@2.1.4(@types/node@20.17.6)(happy-dom@15.8.3)(jsdom@25.0.1))
+        version: 0.3.3(vitest@2.1.4(@types/node@20.17.6)(happy-dom@15.10.1)(jsdom@25.0.1))
 
 packages:
 
@@ -2244,8 +2244,8 @@ packages:
     engines: {node: '>=0.4.7'}
     hasBin: true
 
-  happy-dom@15.8.3:
-    resolution: {integrity: sha512-YR9nUWN/T2bH7pPLEYMhTp4DQExPH+mC4KulJDgimCb+FY3Er0Vp6SOOcBXrNfMTri3lAk9uSZqUTG2hgZOYwg==}
+  happy-dom@15.10.1:
+    resolution: {integrity: sha512-FuGnj/qIB4QnBL6fWmD7Wnh6STxevLgOVWB6+nopDGgWG1+t9CXkNB2ldZ+iqwD2UKxD2D0SU8el8A6AX6Q1+g==}
     engines: {node: '>=18.0.0'}
 
   has-flag@3.0.0:
@@ -6090,7 +6090,7 @@ snapshots:
     optionalDependencies:
       uglify-js: 3.19.3
 
-  happy-dom@15.8.3:
+  happy-dom@15.10.1:
     dependencies:
       entities: 4.5.0
       webidl-conversions: 7.0.0
@@ -7319,12 +7319,12 @@ snapshots:
       '@types/node': 20.17.6
       fsevents: 2.3.3
 
-  vitest-canvas-mock@0.3.3(vitest@2.1.4(@types/node@20.17.6)(happy-dom@15.8.3)(jsdom@25.0.1)):
+  vitest-canvas-mock@0.3.3(vitest@2.1.4(@types/node@20.17.6)(happy-dom@15.10.1)(jsdom@25.0.1)):
     dependencies:
       jest-canvas-mock: 2.5.2
-      vitest: 2.1.4(@types/node@20.17.6)(happy-dom@15.8.3)(jsdom@25.0.1)
+      vitest: 2.1.4(@types/node@20.17.6)(happy-dom@15.10.1)(jsdom@25.0.1)
 
-  vitest@2.1.4(@types/node@20.17.6)(happy-dom@15.8.3)(jsdom@25.0.1):
+  vitest@2.1.4(@types/node@20.17.6)(happy-dom@15.10.1)(jsdom@25.0.1):
     dependencies:
       '@vitest/expect': 2.1.4
       '@vitest/mocker': 2.1.4(vite@5.4.8(@types/node@20.17.6))
@@ -7348,7 +7348,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 20.17.6
-      happy-dom: 15.8.3
+      happy-dom: 15.10.1
       jsdom: 25.0.1
     transitivePeerDependencies:
       - less
