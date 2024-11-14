@@ -8,7 +8,7 @@
 
 - NextJS (App Router)
 - TailwindCSS
-- Framer motion
+- Motion
 
 ## :whale: Start
 
