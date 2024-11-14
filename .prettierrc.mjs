@@ -1,5 +1,7 @@
-import { factory } from '@innei/prettier'
-
-export default factory({
-  importSort: false,
-})
+export default {
+  semi: false,
+  singleQuote: false,
+  printWidth: 100,
+  tabWidth: 2,
+  trailingComma: "all",
+}
