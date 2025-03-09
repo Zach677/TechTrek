@@ -1,7 +1,7 @@
-'use client'
+"use client"
 
-import { motion } from 'motion/react'
-import { useEffect, useState } from 'react'
+import { motion } from "motion/react"
+import { useEffect, useState } from "react"
 
 export const Footer = () => {
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
@@ -12,11 +12,8 @@ export const Footer = () => {
 
   return (
     <footer className="py-8 text-center text-gray-400">
-      <motion.span
-        className="inline-block text-lg"
-        whileHover={{ scale: 1.05 }}
-      >
-        © {currentYear}{' '}
+      <motion.span className="inline-block text-lg" whileHover={{ scale: 1.05 }}>
+        © {currentYear}{" "}
         <a
           href="https://ssstttar.com"
           target="_blank"
@@ -28,11 +25,8 @@ export const Footer = () => {
         </a>
       </motion.span>
       <br />
-      <motion.span
-        className="mt-1 inline-block text-lg"
-        whileHover={{ scale: 1.05 }}
-      >
-        Powered by{' '}
+      <motion.span className="mt-1 inline-block text-lg" whileHover={{ scale: 1.05 }}>
+        Powered by{" "}
         <a
           href="https://github.com/Ssttar/TechTrek"
           target="_blank"
