@@ -1,7 +1,7 @@
 {
   "name": "TechTrek",
   "type": "module",
-  "version": "0.0.1-alpha.5",
+  "version": "0.0.1",
   "private": true,
   "packageManager": "pnpm@9.15.1",
   "description": "My Simple Personal website",
@@ -16,6 +16,7 @@
     "node": ">=18"
   },
   "scripts": {
+    "prebuild": "rimraf .next || exit 0",
     "build": "NODE_ENV=production NODE_OPTIONS=--max_old_space_size=4096 next build",
     "build:ci": "NODE_ENV=production NODE_OPTIONS=--max_old_space_size=4096 NEXT_TELEMETRY_DISABLED=1 CI=true next build",
     "bump": "vv",
@@ -35,7 +36,7 @@
     "clsx": "^2.1.1",
     "commitlint-config-gitmoji": "^2.3.1",
     "motion": "11.15.0",
-    "next": "14.2.21",
+    "next": "14.2.25",
     "postcss-import": "^16.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
@@ -72,6 +73,7 @@
     "simple-git-hooks": "^2.11.1",
     "tailwindcss": "^3.4.17",
     "tailwindcss-animated": "^1.1.2",
+    "tsx": "^4.19.3",
     "typescript": "5.7.2",
     "vitest": "^2.1.8",
     "vitest-canvas-mock": "^0.3.3"
@@ -87,14 +89,16 @@
   },
   "bump": {
     "before": [
-      "git pull --rebase"
+      "git pull --rebase",
+      "tsx scripts/apply-changelog.ts ${NEW_VERSION}",
+      "git add changelog"
     ],
     "after": [
-      "gh pr create --title 'chore: Release v${NEW_VERSION}' --body 'v${NEW_VERSION}' --base main --head dev"
+      "gh pr create --title 'release: Release v${NEW_VERSION}' --body 'v${NEW_VERSION}' --base main --head dev"
     ],
-    "commit_message": "chore(release): release v${NEW_VERSION}",
+    "commit_message": "release: release v${NEW_VERSION}",
     "tag": false,
-    "changelog": true,
+    "changelog": false,
     "allowed_branches": [
       "dev"
     ]
