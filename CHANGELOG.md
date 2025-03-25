@@ -1,15 +1,6 @@
 # CHANGELOG
 
-## [0.0.1](https://github.com/Zach677/TechTrek/compare/v0.0.1-alpha.1...v0.0.1) (2025-03-25)
-
-
-### Bug Fixes
-
-* **deps:** update all non-major dependencies (minor) ([#132](https://github.com/Zach677/TechTrek/issues/132)) ([fe83f3a](https://github.com/Zach677/TechTrek/commit/fe83f3a992154b0345d09bda8c884378ca5fa916))
-* **deps:** update all non-major dependencies (minor) ([#138](https://github.com/Zach677/TechTrek/issues/138)) ([7d796a5](https://github.com/Zach677/TechTrek/commit/7d796a5a4719337332ba30cf3fec2887b576ac09))
-* **deps:** update all non-major dependencies (patch) ([#131](https://github.com/Zach677/TechTrek/issues/131)) ([08521fb](https://github.com/Zach677/TechTrek/commit/08521fb3249330412e8bf05aef4da4eb22b0cdce))
-* **deps:** update all non-major dependencies (patch) ([#139](https://github.com/Zach677/TechTrek/issues/139)) ([889eab5](https://github.com/Zach677/TechTrek/commit/889eab5fbe5bca97cd445bb1ecf7d355060a77b2))
-* **deps:** update react monorepo to v19 (major) ([#136](https://github.com/Zach677/TechTrek/issues/136)) ([2004eb2](https://github.com/Zach677/TechTrek/commit/2004eb22460e2d6b52eb4800d895686297ba2f67))
+## [0.0.1-alpha.4](https://github.com/Zach677/TechTrek/compare/v0.0.1-alpha.1...v0.0.1-alpha.4) (2024-09-30)
 
 
 
