@@ -1,7 +1,7 @@
-'use client'
+"use client"
 
-import { motion } from 'motion/react'
-import Link from 'next/link'
+import { motion } from "motion/react"
+import Link from "next/link"
 
 export const Header = () => {
   return (
@@ -11,14 +11,10 @@ export const Header = () => {
           Zach's Home
         </Link>
         <ul className="flex space-x-6 px-4 font-medium">
-          {['Home', 'Posts', 'Friends'].map((item) => (
-            <motion.li
-              key={item}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
+          {["Home", "Posts", "Friends"].map((item) => (
+            <motion.li key={item} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
               <Link
-                href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
+                href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
                 className="text-primary hover:text-secondary"
               >
                 {item}
