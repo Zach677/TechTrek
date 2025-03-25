@@ -16,13 +16,13 @@
     "node": ">=18"
   },
   "scripts": {
+    "prebuild": "rimraf .next || exit 0",
     "build": "NODE_ENV=production NODE_OPTIONS=--max_old_space_size=4096 next build",
     "build:ci": "NODE_ENV=production NODE_OPTIONS=--max_old_space_size=4096 NEXT_TELEMETRY_DISABLED=1 CI=true next build",
     "bump": "vv",
     "dev": "NODE_ENV=development next dev -p 2323",
     "dev:turbo": "NODE_ENV=development next dev -p 2323 --turbo",
     "lint": "eslint",
-    "prebuild": "rimraf .next || exit 0",
     "prepare": "pnpm exec simple-git-hooks",
     "prod:pm2": "NODE_ENV=production pm2 restart ecosystem.config.cjs",
     "prod:reload": "pm2 reload ecosystem.config.cjs",
@@ -87,14 +87,16 @@
   },
   "bump": {
     "before": [
-      "git pull --rebase"
+      "git pull --rebase",
+      "tsx scripts/apply-changelog.ts ${NEW_VERSION}",
+      "git add changelog"
     ],
     "after": [
-      "gh pr create --title 'chore: Release v${NEW_VERSION}' --body 'v${NEW_VERSION}' --base main --head dev"
+      "gh pr create --title 'release: Release v${NEW_VERSION}' --body 'v${NEW_VERSION}' --base main --head dev"
     ],
-    "commit_message": "chore(release): release v${NEW_VERSION}",
+    "commit_message": "release: release v${NEW_VERSION}",
     "tag": false,
-    "changelog": true,
+    "changelog": false,
     "allowed_branches": [
       "dev"
     ]
