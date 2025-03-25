@@ -1,5 +1,5 @@
 // https://github.com/Innei/Shiro/blob/main/src/components/icons/platform/MailIcon.tsx
-import type React from 'react'
+import type * as React from "react"
 
 export function MailIcon(props: React.SVGAttributes<SVGElement>) {
   return (

@@ -1,7 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import React from 'react'
+import { motion } from 'motion/react'
+import * as React from 'react'
 
 import { BlogHeader } from './components/PostHeader'
 import { BlogList } from './components/PostList'

@@ -1,6 +1,7 @@
-import config from '@innei/prettier'
-
 export default {
-  ...config,
-  importOrderParserPlugins: ['importAssertions', 'typescript', 'jsx'],
+  semi: false,
+  singleQuote: false,
+  printWidth: 100,
+  tabWidth: 2,
+  trailingComma: "all",
 }

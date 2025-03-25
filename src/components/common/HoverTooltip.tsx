@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import type { ReactNode } from 'react'
-import React from 'react'
+import * as React from 'react'
 
 interface HoverTooltipProps {
   /** 要显示的内容 */
