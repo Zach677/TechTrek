@@ -1,5 +1,6 @@
 # CHANGELOG
 
+
 ## [0.0.1-alpha.5](https://github.com/Zach677/TechTrek/compare/v0.0.1-alpha.1...v0.0.1-alpha.5) (2025-03-25)
 
 
@@ -10,11 +11,6 @@
 * **deps:** update all non-major dependencies (patch) ([#131](https://github.com/Zach677/TechTrek/issues/131)) ([08521fb](https://github.com/Zach677/TechTrek/commit/08521fb3249330412e8bf05aef4da4eb22b0cdce))
 * **deps:** update all non-major dependencies (patch) ([#139](https://github.com/Zach677/TechTrek/issues/139)) ([889eab5](https://github.com/Zach677/TechTrek/commit/889eab5fbe5bca97cd445bb1ecf7d355060a77b2))
 * **deps:** update react monorepo to v19 (major) ([#136](https://github.com/Zach677/TechTrek/issues/136)) ([2004eb2](https://github.com/Zach677/TechTrek/commit/2004eb22460e2d6b52eb4800d895686297ba2f67))
-
-
-### Reverts
-
-* Revert "chore(release): release v0.0.1" ([7fc6cbe](https://github.com/Zach677/TechTrek/commit/7fc6cbea2c6a66c11820abb922d9ab51834c4d58))
 
 
 
