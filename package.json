@@ -23,6 +23,7 @@
     "dev": "NODE_ENV=development next dev -p 2323",
     "dev:turbo": "NODE_ENV=development next dev -p 2323 --turbo",
     "lint": "eslint",
+    "prebuild": "rimraf .next || exit 0",
     "prepare": "pnpm exec simple-git-hooks",
     "prod:pm2": "NODE_ENV=production pm2 restart ecosystem.config.cjs",
     "prod:reload": "pm2 reload ecosystem.config.cjs",
