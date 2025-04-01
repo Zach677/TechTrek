@@ -18,8 +18,8 @@ importers:
         specifier: ^2.3.1
         version: 2.3.1
       motion:
-        specifier: 11.18.2
-        version: 11.18.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: 12.6.3
+        version: 12.6.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       next:
         specifier: 14.2.26
         version: 14.2.26(@babel/core@7.26.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -2202,8 +2202,8 @@ packages:
   fraction.js@4.3.7:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
 
-  framer-motion@11.18.2:
-    resolution: {integrity: sha512-5F5Och7wrvtLVElIpclDT0CBzMVg3dL22B64aZwHtsIY8RB4mXICLrkajK4G9R+ieSAGcgrLeae2SeUTg2pr6w==}
+  framer-motion@12.6.3:
+    resolution: {integrity: sha512-2hsqknz23aloK85bzMc9nSR2/JP+fValQ459ZTVElFQ0xgwR2YqNjYSuDZdFBPOwVCt4Q9jgyTt6hg6sVOALzw==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0 || ^19.0.0
@@ -2739,14 +2739,14 @@ packages:
   moo-color@1.0.3:
     resolution: {integrity: sha512-i/+ZKXMDf6aqYtBhuOcej71YSlbjT3wCO/4H1j8rPvxDJEifdwgg5MaFyu6iYAT8GBZJg2z0dkgK4YMzvURALQ==}
 
-  motion-dom@11.18.1:
-    resolution: {integrity: sha512-g76KvA001z+atjfxczdRtw/RXOM3OMSdd1f4DL77qCTF/+avrRJiawSG4yDibEQ215sr9kpinSlX2pCTJ9zbhw==}
+  motion-dom@12.6.3:
+    resolution: {integrity: sha512-gRY08RjcnzgFYLemUZ1lo/e9RkBxR+6d4BRvoeZDSeArG4XQXERSPapKl3LNQRu22Sndjf1h+iavgY0O4NrYqA==}
 
-  motion-utils@11.18.1:
-    resolution: {integrity: sha512-49Kt+HKjtbJKLtgO/LKj9Ld+6vw9BjH5d9sc40R/kVyH8GLAXgT42M2NnuPcJNuA3s9ZfZBUcwIgpmZWGEE+hA==}
+  motion-utils@12.6.3:
+    resolution: {integrity: sha512-R/b3Ia2VxtTNZ4LTEO5pKYau1OUNHOuUfxuP0WFCTDYdHkeTBR9UtxR1cc8mDmKr8PEhmmfnTKGz3rSMjNRoRg==}
 
-  motion@11.18.2:
-    resolution: {integrity: sha512-JLjvFDuFr42NFtcVoMAyC2sEjnpA8xpy6qWPyzQvCloznAyQ8FIXioxWfHiLtgYhoVpfUqSWpn1h9++skj9+Wg==}
+  motion@12.6.3:
+    resolution: {integrity: sha512-zw/vqUgv5F5m9fkvOl/eCv2AF1+tkeZl3fu2uIlisIaip8sm5e0CouAl6GkdiRoF+G7s29CjqMdIyPMirwUGHA==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0 || ^19.0.0
@@ -6070,10 +6070,10 @@ snapshots:
 
   fraction.js@4.3.7: {}
 
-  framer-motion@11.18.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+  framer-motion@12.6.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
-      motion-dom: 11.18.1
-      motion-utils: 11.18.1
+      motion-dom: 12.6.3
+      motion-utils: 12.6.3
       tslib: 2.8.1
     optionalDependencies:
       react: 19.1.0
@@ -6592,15 +6592,15 @@ snapshots:
     dependencies:
       color-name: 1.1.4
 
-  motion-dom@11.18.1:
+  motion-dom@12.6.3:
     dependencies:
-      motion-utils: 11.18.1
+      motion-utils: 12.6.3
 
-  motion-utils@11.18.1: {}
+  motion-utils@12.6.3: {}
 
-  motion@11.18.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+  motion@12.6.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
-      framer-motion: 11.18.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      framer-motion: 12.6.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       tslib: 2.8.1
     optionalDependencies:
       react: 19.1.0
