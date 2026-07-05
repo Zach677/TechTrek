@@ -1,13 +1,14 @@
 @theme {
-  /* ── Type: serif-led (book/newspaper), mono only for small labels ──
-     Make sure index.html loads these families (Newsreader, Source Serif 4,
-     Noto Serif SC, Spline Sans Mono). */
-  /* serif-led; Latin from Source Serif 4, CJK from Noto Serif SC with a deep
-     system-serif fallback chain (aligned with innei.in) so Chinese stays in a
-     proper serif before/without the webfont. */
+  /* ── Type: sans body/UI, serif for display/quotes, mono for small labels.
+     Body reads in a modern sans (Instrument Sans + system CJK sans); serif is
+     reserved for headings, mastheads and pullquotes — the same split innei.in
+     uses. Make sure index.html loads Instrument Sans, Source Serif 4,
+     Noto Serif SC and Spline Sans Mono. */
+  --font-cjk-sans: 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB',
+    'Noto Sans SC', system-ui, sans-serif;
   --font-cjk-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Source Han Serif',
     'Songti SC', SimSun, 'Hiragino Sans GB', serif;
-  --font-sans: 'Source Serif 4', var(--font-cjk-serif);
+  --font-sans: 'Instrument Sans', var(--font-cjk-sans);
   --font-serif: 'Source Serif 4', var(--font-cjk-serif);
   --font-display: 'Source Serif 4', var(--font-cjk-serif);
   --font-mono: 'Spline Sans Mono', ui-monospace, monospace;
