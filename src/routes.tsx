@@ -14,6 +14,10 @@ const RootPage = lazy(() => import('./pages/index'))
 export const loadPostPage = () => import('./pages/post')
 const PostPage = lazy(loadPostPage)
 
+function pagePath(slug: string) {
+  return slug === 'mitori-privacy' ? 'mitori/privacy' : `page/${slug}`
+}
+
 function wrapPostPage(
   slug: string,
   loader: (slug: string) => Promise<PostModule>,
@@ -50,12 +54,12 @@ const routes: RouteObject[] = [
         },
       })),
       ...pageIndex.map((page) => ({
-        path: `page/${page.slug}`,
+        path: pagePath(page.slug!),
         Component: wrapPostPage(page.slug!, loadPage),
         metadata: {
           title: page.title,
           description: page.description,
-          url: `https://zaxh.org/page/${page.slug}`,
+          url: `https://zaxh.org/${pagePath(page.slug!)}`,
         },
       })),
     ],
