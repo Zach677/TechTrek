@@ -36,6 +36,15 @@ const styles = stylex.create({
       ':hover': colors.heading,
     },
     transition: 'color 0.25s var(--ease)',
+    outline: {
+      default: 'none',
+      ':focus-visible': `2px solid ${colors.accent}`,
+    },
+    outlineOffset: {
+      default: null,
+      ':focus-visible': '3px',
+    },
+    borderRadius: '2px',
     '::after': {
       content: {
         default: null,
@@ -58,13 +67,13 @@ export const NavBar = () => {
         <Logo />
       </Link>
       <div {...stylex.props(styles.links)}>
-        <Link {...stylex.props(styles.link, shared.inkLink)} to="/">
+        <Link {...stylex.props(shared.inkLink, styles.link)} to="/">
           index
         </Link>
-        <Link {...stylex.props(styles.link, shared.inkLink)} to="/page/about">
+        <Link {...stylex.props(shared.inkLink, styles.link)} to="/page/about">
           about
         </Link>
-        <Link {...stylex.props(styles.link, shared.inkLink)} to="/page/friends">
+        <Link {...stylex.props(shared.inkLink, styles.link)} to="/page/friends">
           friends
         </Link>
       </div>

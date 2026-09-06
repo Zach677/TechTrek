@@ -16,8 +16,8 @@ const styles = stylex.create({
     borderColor: colors.separator,
     transition:
       'opacity 0.3s var(--ease), transform 0.3s var(--ease), color 0.3s var(--ease)',
-    boxShadow:
-      '0 4px 6px -1px rgba(0,0,0,0.08), 0 2px 4px -2px rgba(0,0,0,0.06)',
+    // Yohaku: ring / whisper only — no hard drop shadow
+    boxShadow: `0 0 0 1px ${colors.separatorSoft}`,
     color: {
       default: colors.secondary,
       ':hover': colors.heading,
@@ -39,6 +39,14 @@ const styles = stylex.create({
         'translateX(calc(42rem / 2 + 2rem)) translateY(1rem)',
     },
     pointerEvents: 'none',
+    outline: {
+      default: 'none',
+      ':focus-visible': `2px solid ${colors.accent}`,
+    },
+    outlineOffset: {
+      default: null,
+      ':focus-visible': '3px',
+    },
   },
   visible: {
     opacity: 1,
@@ -79,9 +87,12 @@ export function BackToTop() {
 
   return (
     <button
+      type="button"
       onClick={scrollToTop}
       {...stylex.props(styles.button, visible && styles.visible)}
       aria-label="Back to top"
+      tabIndex={visible ? 0 : -1}
+      aria-hidden={!visible}
     >
       <span {...stylex.props(shared.srOnly)}>Back to top</span>
       <Icon icon="arrow-up" {...stylex.props(styles.icon)} />

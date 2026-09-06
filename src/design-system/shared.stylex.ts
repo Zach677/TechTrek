@@ -11,8 +11,8 @@ export const shared = stylex.create({
     textTransform: 'uppercase',
     color: colors.secondary,
   },
+  /** Underline wipe only — callers own color via stylex.props order. */
   inkLink: {
-    color: 'inherit',
     textDecoration: 'none',
     backgroundImage: 'linear-gradient(currentColor, currentColor)',
     backgroundSize: {

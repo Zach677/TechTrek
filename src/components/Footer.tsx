@@ -41,6 +41,15 @@ const styles = stylex.create({
       default: null,
       ':hover': 'translateY(-2px) rotate(-4deg)',
     },
+    borderRadius: '2px',
+    outline: {
+      default: 'none',
+      ':focus-visible': `2px solid ${colors.accent}`,
+    },
+    outlineOffset: {
+      default: null,
+      ':focus-visible': '3px',
+    },
   },
 })
 

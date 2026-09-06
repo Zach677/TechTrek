@@ -1,4 +1,9 @@
-import { type MouseEventHandler, useSyncExternalStore } from 'react'
+import {
+  type KeyboardEvent,
+  type MouseEventHandler,
+  useRef,
+  useSyncExternalStore,
+} from 'react'
 import * as stylex from '@stylexjs/stylex'
 import { type IconType, Icon } from '@/components/Icon'
 import { type Theme, themeManager } from '@/theme'
@@ -40,6 +45,15 @@ const styles = stylex.create({
     borderWidth: 0,
     backgroundColor: 'transparent',
     transition: 'color 0.2s var(--ease)',
+    borderRadius: '9999px',
+    outline: {
+      default: 'none',
+      ':focus-visible': `2px solid ${colors.accent}`,
+    },
+    outlineOffset: {
+      default: null,
+      ':focus-visible': '2px',
+    },
     '::after': {
       content: {
         default: null,
@@ -64,34 +78,50 @@ const styles = stylex.create({
   },
 })
 
-function ThemeRadioButton({
-  active,
-  icon,
-  title,
-  onClick,
-}: {
-  active: boolean
-  icon: IconType
-  title: string
-  onClick: MouseEventHandler
-}) {
-  return (
-    <button
-      {...stylex.props(styles.button, active ? styles.active : styles.inactive)}
-      role="radio"
-      aria-label={title}
-      aria-checked={active}
-      onClick={onClick}
-    >
-      <Icon icon={icon} size="15px" />
-    </button>
-  )
-}
+const THEME_OPTIONS: { theme: Theme; icon: IconType; title: string }[] = [
+  { theme: 'dark', icon: 'moon', title: 'Dark' },
+  { theme: 'system', icon: 'display', title: 'System' },
+  { theme: 'light', icon: 'sun', title: 'Light' },
+]
 
 const INDICATOR_OFFSET_MAP: Record<Theme, number> = {
   dark: 2,
   system: 32,
   light: 62,
+}
+
+function ThemeRadioButton({
+  active,
+  icon,
+  title,
+  onClick,
+  onKeyDown,
+  tabIndex,
+  buttonRef,
+}: {
+  active: boolean
+  icon: IconType
+  title: string
+  onClick: MouseEventHandler
+  onKeyDown: (e: KeyboardEvent<HTMLButtonElement>) => void
+  tabIndex: number
+  buttonRef: (el: HTMLButtonElement | null) => void
+}) {
+  return (
+    <button
+      ref={buttonRef}
+      {...stylex.props(styles.button, active ? styles.active : styles.inactive)}
+      type="button"
+      role="radio"
+      aria-label={title}
+      aria-checked={active}
+      tabIndex={tabIndex}
+      onClick={onClick}
+      onKeyDown={onKeyDown}
+    >
+      <Icon icon={icon} size="15px" />
+    </button>
+  )
 }
 
 export function ThemeSwitcher() {
@@ -103,36 +133,74 @@ export function ThemeSwitcher() {
     () => 'system',
   )
 
+  const buttonRefs = useRef<(HTMLButtonElement | null)[]>([])
+
   function changeTheme(theme: Theme) {
     themeManager.setTheme(theme)
   }
 
+  function focusOption(index: number) {
+    const next = THEME_OPTIONS[index]
+    changeTheme(next.theme)
+    // Focus after state update so the tab stop moves with selection
+    requestAnimationFrame(() => {
+      buttonRefs.current[index]?.focus()
+    })
+  }
+
+  function handleKeyDown(
+    e: KeyboardEvent<HTMLButtonElement>,
+    index: number,
+  ) {
+    let nextIndex: number | null = null
+    switch (e.key) {
+      case 'ArrowRight':
+      case 'ArrowDown':
+        nextIndex = (index + 1) % THEME_OPTIONS.length
+        break
+      case 'ArrowLeft':
+      case 'ArrowUp':
+        nextIndex = (index - 1 + THEME_OPTIONS.length) % THEME_OPTIONS.length
+        break
+      case 'Home':
+        nextIndex = 0
+        break
+      case 'End':
+        nextIndex = THEME_OPTIONS.length - 1
+        break
+      default:
+        return
+    }
+    e.preventDefault()
+    focusOption(nextIndex)
+  }
+
   return (
-    <div {...stylex.props(styles.root)} aria-label="Theme Switcher">
+    <div
+      {...stylex.props(styles.root)}
+      role="radiogroup"
+      aria-label="Theme Switcher"
+    >
       <div
         {...stylex.props(styles.thumb)}
         style={{ left: INDICATOR_OFFSET_MAP[currentTheme] }}
       />
 
       <div {...stylex.props(styles.row)}>
-        <ThemeRadioButton
-          active={currentTheme === 'dark'}
-          icon="moon"
-          title="Dark"
-          onClick={() => changeTheme('dark')}
-        />
-        <ThemeRadioButton
-          active={currentTheme === 'system'}
-          icon="display"
-          title="System"
-          onClick={() => changeTheme('system')}
-        />
-        <ThemeRadioButton
-          active={currentTheme === 'light'}
-          icon="sun"
-          title="Light"
-          onClick={() => changeTheme('light')}
-        />
+        {THEME_OPTIONS.map((opt, index) => (
+          <ThemeRadioButton
+            key={opt.theme}
+            active={currentTheme === opt.theme}
+            icon={opt.icon}
+            title={opt.title}
+            tabIndex={currentTheme === opt.theme ? 0 : -1}
+            buttonRef={(el) => {
+              buttonRefs.current[index] = el
+            }}
+            onClick={() => changeTheme(opt.theme)}
+            onKeyDown={(e) => handleKeyDown(e, index)}
+          />
+        ))}
       </div>
     </div>
   )

@@ -101,6 +101,14 @@ const styles = stylex.create({
       default: null,
       '@media (max-width: 720px)': '0.3rem',
     },
+    transition: 'transform 0.4s var(--ease-spring)',
+    transform: {
+      default: null,
+      ':hover': {
+        default: null,
+        '@media (hover: hover)': 'translateX(10px)',
+      },
+    },
   },
   title: {
     flexGrow: {
@@ -121,14 +129,6 @@ const styles = stylex.create({
     fontWeight: 500,
     lineHeight: 1.3,
     color: colors.heading,
-    transition: 'transform 0.4s var(--ease-spring)',
-    transform: {
-      default: null,
-      ':hover': {
-        default: null,
-        '@media (hover: hover)': 'translateX(10px)',
-      },
-    },
   },
   date: {
     flexGrow: 0,

@@ -44,9 +44,6 @@ const styles = stylex.create({
     marginBottom: '3rem',
     maxWidth: '36rem',
   },
-  reader: {
-    // class md-reader kept for residual CSS (nested MDX)
-  },
   pager: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -59,6 +56,7 @@ const styles = stylex.create({
   },
   pagerLink: {
     maxWidth: '46%',
+    color: colors.body,
   },
   pagerTitle: {
     fontFamily: fonts.serif,
@@ -70,6 +68,7 @@ const styles = stylex.create({
     textAlign: 'right',
     marginLeft: 'auto',
     maxWidth: '46%',
+    color: colors.body,
   },
 })
 
