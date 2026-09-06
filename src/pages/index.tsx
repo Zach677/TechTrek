@@ -11,7 +11,12 @@ function PostItem({ post }: { post: PostMetadata }) {
   return (
     <li className="index-item">
       <Link to={`/post/${post.slug}`}>
-        <span className="title">{post.title}</span>
+        <span className="copy">
+          <span className="title">{post.title}</span>
+          {post.description ? (
+            <span className="lede">{post.description}</span>
+          ) : null}
+        </span>
         <FormattedTime className="date" dateTime={date} />
       </Link>
     </li>
