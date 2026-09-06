@@ -35,7 +35,7 @@ const styles = stylex.create({
       default: colors.secondary,
       ':hover': colors.heading,
     },
-    transition: 'color 0.25s var(--ease)',
+    transition: 'color 0.25s var(--ease), background-size 0.35s var(--ease)',
     outline: {
       default: 'none',
       ':focus-visible': `2px solid ${colors.accent}`,

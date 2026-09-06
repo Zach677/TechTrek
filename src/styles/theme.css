@@ -8,7 +8,7 @@
   --font-sans: 'Inter', var(--font-cjk-sans);
   --font-serif: 'Source Serif 4', var(--font-cjk-serif);
   --font-mono: 'JetBrains Mono', 'Cascadia Code PL', 'Fira Code', Consolas,
-    Monaco, ui-monospace, monospace, var(--font-cjk-sans);
+    Monaco, var(--font-cjk-sans), ui-monospace, monospace;
   --font-logo-cjk: 'Noto Serif JP', 'Source Han Serif', 'Noto Serif CJK SC',
     serif;
   --font-logo-latin: 'EB Garamond', Georgia, serif;
@@ -51,7 +51,7 @@
   --color-code-highlighted-line: rgba(0, 0, 0, 0.06);
   --color-code-plate: #1b1b1b;
   --color-code-ink: #e8e6e1;
-  --color-code-muted: #787670; /* n-6 — never n-5 for text */
+  --color-code-muted: #8a8a8a; /* on dark code plate; ≥4.5:1 vs #1b1b1b */
 
   --paper-grain-opacity: 0.045;
   --paper-grain-blend: multiply;
