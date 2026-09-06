@@ -1,14 +1,21 @@
 import type { FC, PropsWithChildren } from 'react'
-import clsx from 'clsx'
+import * as stylex from '@stylexjs/stylex'
 
 type ReadableAreaProps = {
-  className?: string
+  style?: stylex.StyleXStyles
 }
+
+const styles = stylex.create({
+  root: {
+    marginInline: 'auto',
+    maxWidth: '48rem',
+    paddingInline: '1.5rem',
+  },
+})
+
 export const ReadableArea: FC<PropsWithChildren<ReadableAreaProps>> = ({
-  className,
+  style,
   children,
 }) => {
-  return (
-    <div className={clsx('mx-auto max-w-3xl px-6', className)}>{children}</div>
-  )
+  return <div {...stylex.props(styles.root, style)}>{children}</div>
 }

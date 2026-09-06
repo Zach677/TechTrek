@@ -1,43 +1,91 @@
 @theme {
-  /* ── Type: sans body/UI, serif for display/quotes, mono for small labels.
-     Body reads in a modern sans (Instrument Sans + system CJK sans); serif is
-     reserved for headings, mastheads and pullquotes — the same split innei.in
-     uses. Make sure index.html loads Instrument Sans, Source Serif 4,
-     Noto Serif SC and Spline Sans Mono. */
+  /* Yohaku fonts — sans body/UI, serif display/quotes, mono labels.
+     CJK fallbacks are mandatory wherever Chinese can render. */
   --font-cjk-sans: 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB',
     'Noto Sans SC', system-ui, sans-serif;
-  --font-cjk-serif: 'Noto Serif SC', 'Source Han Serif SC', 'Source Han Serif',
-    'Songti SC', SimSun, 'Hiragino Sans GB', serif;
-  --font-sans: 'Instrument Sans', var(--font-cjk-sans);
+  --font-cjk-serif: 'Noto Serif CJK SC', 'Noto Serif SC', 'Source Han Serif SC',
+    'Source Han Serif', 'Songti SC', SimSun, 'Hiragino Sans GB', serif;
+  --font-sans: 'Inter', var(--font-cjk-sans);
   --font-serif: 'Source Serif 4', var(--font-cjk-serif);
-  --font-display: 'Source Serif 4', var(--font-cjk-serif);
-  --font-mono: 'Spline Sans Mono', ui-monospace, monospace;
+  --font-mono: 'JetBrains Mono', 'Cascadia Code PL', 'Fira Code', Consolas,
+    Monaco, ui-monospace, monospace;
+  --font-logo-cjk: 'Noto Serif JP', 'Source Han Serif', 'Noto Serif CJK SC',
+    serif;
+  --font-logo-latin: 'EB Garamond', Georgia, serif;
+  /* display alias kept for residual CSS / masthead */
+  --font-display: var(--font-serif);
 
-  /* ── Light = warm paper "sheet". Pure ink, no colour. ── */
-  --color-background: #f1e9d6;
-  --color-background-secondary: #e7dcc2;
-  --color-background-hi: #f7f1e1; /* lit highlight of the sheet */
-  --color-primary: #211c12;        /* near-black warm ink   */
-  --color-secondary: #5c5340;      /* secondary ink         */
-  --color-tertiary: #94886c;       /* captions / faint ink  */
-  --color-separator: --alpha(var(--color-primary) / 14%);
-  --color-separator-soft: --alpha(var(--color-primary) / 8%);
-  --color-ink-wash: --alpha(var(--color-primary) / 5%); /* faint ink fill */
-  --color-link: var(--color-primary);
-  --color-link-highlighted: var(--color-primary);
-  --color-code-highlighted-line: --alpha(#000000 / 6%);
+  /* ── Light = Yohaku paper (素 Pure neutrals + 梅 ume accent) ── */
+  --color-neutral-1: #f9f8f5;
+  --color-neutral-2: #f0efeb;
+  --color-neutral-3: #e3e1db;
+  --color-neutral-4: #d0cec6;
+  --color-neutral-5: #a8a69f;
+  --color-neutral-6: #787670;
+  --color-neutral-7: #5c5a55;
+  --color-neutral-8: #403f3a;
+  --color-neutral-9: #24231f;
+  --color-neutral-10: #141312;
 
-  /* vermilion ink — the only colour in the almanac */
-  --color-accent: oklch(0.52 0.11 40);
-  --color-accent-soft: oklch(0.52 0.11 40 / 0.14);
+  --color-paper: var(--color-neutral-1);
+  --color-accent: #c56473; /* 梅 ume */
+  --color-accent-soft: color-mix(in oklab, var(--color-accent) 18%, transparent);
+  --color-info: #3d6896; /* 縹 hanada */
+  --color-success: #5e9f7e; /* 若竹 wakatake */
+  --color-warning: #a87a3d; /* 朽葉 kuchiba */
+  --color-error: #a64953; /* 蘇芳 suoh */
+  --color-border: rgba(24, 24, 27, 0.1);
 
-  /* paper texture controls */
-  --paper-grain-opacity: 0.06;
+  /* Semantic aliases used by residual CSS / StyleX */
+  --color-background: var(--color-paper);
+  --color-background-secondary: var(--color-neutral-2);
+  --color-background-hi: #fdfcfa;
+  --color-primary: var(--color-neutral-9);
+  --color-secondary: var(--color-neutral-7);
+  --color-tertiary: var(--color-neutral-6);
+  --color-separator: var(--color-border);
+  --color-separator-soft: rgba(24, 24, 27, 0.06);
+  --color-ink-wash: rgba(36, 35, 31, 0.05);
+  --color-link: var(--color-neutral-9);
+  --color-link-highlighted: var(--color-accent);
+  --color-code-highlighted-line: rgba(0, 0, 0, 0.06);
+  --color-code-plate: #1b1b1b;
+  --color-code-ink: #e8e6e1;
+  --color-code-muted: #a8a69f;
+
+  --paper-grain-opacity: 0.045;
   --paper-grain-blend: multiply;
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-spring: cubic-bezier(0.34, 1.4, 0.46, 1);
   --ease-out-cubic: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* Yohaku type roles (role + px) */
+  --text-caption-10: 10px;
+  --text-caption-10--line-height: 1.4;
+  --text-label-12: 12px;
+  --text-label-12--line-height: 1.5;
+  --text-copy-13: 13px;
+  --text-copy-13--line-height: 1.54;
+  --text-copy-14: 14px;
+  --text-copy-14--line-height: 1.57;
+  --text-copy-15: 15px;
+  --text-copy-15--line-height: 1.6;
+  --text-copy-16: 16px;
+  --text-copy-16--line-height: 1.625;
+  --text-title-20: 20px;
+  --text-title-20--line-height: 1.4;
+  --text-title-24: 24px;
+  --text-title-24--line-height: 1.33;
+  --text-title-28: 28px;
+  --text-title-28--line-height: 1.29;
+  --text-display-36: 36px;
+  --text-display-36--line-height: 1.22;
+  --text-display-48: 48px;
+  --text-display-48--line-height: 1.17;
+  --text-icon-sm: 14px;
+  --text-icon-md: 16px;
+  --text-icon-lg: 18px;
 
   --animate-spin: spin 1s linear infinite;
   @keyframes spin {
@@ -51,25 +99,40 @@
 }
 
 @utility dark-theme-colors {
-  /* ── Dark = kraft / 牛皮纸. Warm cream ink on dark kraft. ── */
-  --color-background: #2a2318;
-  --color-background-secondary: #211b12;
-  --color-background-hi: #322a1d;
-  --color-primary: #ece0c6;
-  --color-secondary: #b3a583;
-  --color-tertiary: #7c7257;
-  --color-separator: --alpha(var(--color-primary) / 16%);
-  --color-separator-soft: --alpha(var(--color-primary) / 9%);
-  --color-ink-wash: --alpha(var(--color-primary) / 6%);
-  --color-link: var(--color-primary);
-  --color-link-highlighted: var(--color-primary);
-  --color-code-highlighted-line: --alpha(#000000 / 30%);
+  /* Dark = inverted pure-gray neutrals; warmth lives only on paper. */
+  --color-neutral-1: #181818;
+  --color-neutral-2: #222222;
+  --color-neutral-3: #2e2e2e;
+  --color-neutral-4: #3d3d3d;
+  --color-neutral-5: #5c5c5c;
+  --color-neutral-6: #8a8a8a;
+  --color-neutral-7: #a3a3a3;
+  --color-neutral-8: #c4c4c4;
+  --color-neutral-9: #e5e5e5;
+  --color-neutral-10: #f5f5f5;
 
-  /* kraft tone lifts the vermilion a little so it stays legible */
-  --color-accent: oklch(0.72 0.11 45);
-  --color-accent-soft: oklch(0.72 0.11 45 / 0.16);
+  --color-paper: #141312;
+  --color-accent: #d47886; /* ume lifted for dark surfaces */
+  --color-accent-soft: color-mix(in oklab, var(--color-accent) 20%, transparent);
+  --color-border: rgba(255, 255, 255, 0.1);
 
-  --paper-grain-opacity: 0.1;
+  --color-background: var(--color-paper);
+  --color-background-secondary: var(--color-neutral-2);
+  --color-background-hi: #1c1b19;
+  --color-primary: var(--color-neutral-9);
+  --color-secondary: var(--color-neutral-7);
+  --color-tertiary: var(--color-neutral-6);
+  --color-separator: var(--color-border);
+  --color-separator-soft: rgba(255, 255, 255, 0.06);
+  --color-ink-wash: rgba(255, 255, 255, 0.06);
+  --color-link: var(--color-neutral-9);
+  --color-link-highlighted: var(--color-accent);
+  --color-code-highlighted-line: rgba(255, 255, 255, 0.06);
+  --color-code-plate: #121212;
+  --color-code-ink: #e8e6e1;
+  --color-code-muted: #8a8a8a;
+
+  --paper-grain-opacity: 0.08;
   --paper-grain-blend: screen;
 }
 

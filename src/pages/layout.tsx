@@ -1,7 +1,15 @@
 import { Outlet, ScrollRestoration } from 'react-router'
+import * as stylex from '@stylexjs/stylex'
 import { Footer } from '@/components/Footer'
 import { NavBar } from '@/components/NavBar'
 import { ReadableArea } from '@/components/ReadableArea'
+
+const styles = stylex.create({
+  mainPad: {
+    marginTop: '1.5rem',
+    marginBottom: '6rem',
+  },
+})
 
 export default function RootLayout() {
   return (
@@ -9,7 +17,7 @@ export default function RootLayout() {
       <ReadableArea>
         <NavBar />
       </ReadableArea>
-      <ReadableArea className="mt-6 mb-24">
+      <ReadableArea style={styles.mainPad}>
         <Outlet />
       </ReadableArea>
       <ReadableArea>

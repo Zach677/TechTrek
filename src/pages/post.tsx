@@ -1,9 +1,77 @@
+import * as stylex from '@stylexjs/stylex'
 import { Link } from 'react-router'
 
 import { Reader } from '@/components/reader'
 import { FormattedTime } from '@/components/FormattedTime'
 import { BackToTop } from '@/components/BackToTop'
+import { colors, fonts, typeScale } from '../design-system/tokens.stylex'
+import { shared } from '../design-system/shared.stylex'
 import postIndex from 'virtual:postIndex'
+
+const styles = stylex.create({
+  article: {
+    maxWidth: '42rem',
+    marginInline: 'auto',
+  },
+  crumb: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    marginBottom: '3rem',
+  },
+  folio: {
+    display: 'flex',
+    gap: '1.25rem',
+    flexWrap: 'wrap',
+    marginBottom: '1.5rem',
+  },
+  title: {
+    fontFamily: fonts.serif,
+    fontSize: 'clamp(2.3rem, 5.5vw, 3.6rem)',
+    lineHeight: 1.15,
+    fontWeight: 500,
+    letterSpacing: '-0.01em',
+    marginTop: 0,
+    marginBottom: '1.25rem',
+    color: colors.heading,
+  },
+  lede: {
+    fontStyle: 'italic',
+    fontSize: typeScale.copy16,
+    lineHeight: typeScale.copy16Lh,
+    color: colors.secondary,
+    marginTop: 0,
+    marginBottom: '3rem',
+    maxWidth: '36rem',
+  },
+  reader: {
+    // class md-reader kept for residual CSS (nested MDX)
+  },
+  pager: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    gap: '1rem',
+    marginTop: '4rem',
+    paddingTop: '1.5rem',
+    borderTopWidth: '1px',
+    borderTopStyle: 'solid',
+    borderTopColor: colors.separatorSoft,
+  },
+  pagerLink: {
+    maxWidth: '46%',
+  },
+  pagerTitle: {
+    fontFamily: fonts.serif,
+    fontSize: typeScale.copy16,
+    fontWeight: 500,
+    lineHeight: 1.4,
+  },
+  pagerEnd: {
+    textAlign: 'right',
+    marginLeft: 'auto',
+    maxWidth: '46%',
+  },
+})
 
 function Pager({ slug }: { slug: string }) {
   const idx = postIndex.findIndex((p) => p.slug === slug)
@@ -14,17 +82,23 @@ function Pager({ slug }: { slug: string }) {
   if (!newer && !older) return null
 
   return (
-    <nav className="pager">
+    <nav {...stylex.props(styles.pager)}>
       {older ? (
-        <Link className="ink-link" to={`/post/${older.slug}`}>
-          <span className="t">← {older.title}</span>
+        <Link
+          {...stylex.props(shared.inkLink, styles.pagerLink)}
+          to={`/post/${older.slug}`}
+        >
+          <span {...stylex.props(styles.pagerTitle)}>← {older.title}</span>
         </Link>
       ) : (
         <span />
       )}
       {newer ? (
-        <Link className="ink-link" to={`/post/${newer.slug}`}>
-          <span className="t">{newer.title} →</span>
+        <Link
+          {...stylex.props(shared.inkLink, styles.pagerEnd)}
+          to={`/post/${newer.slug}`}
+        >
+          <span {...stylex.props(styles.pagerTitle)}>{newer.title} →</span>
         </Link>
       ) : (
         <span />
@@ -49,34 +123,36 @@ export default function PostPage(props: {
 
   if (!isPost) {
     return (
-      <main className="article">
-        <Reader contentComponent={contentComponent} />
+      <main {...stylex.props(styles.article)}>
+        <div className="md-reader">
+          <Reader contentComponent={contentComponent} />
+        </div>
         <BackToTop />
       </main>
     )
   }
 
   return (
-    <main className="article">
-      <div className="crumb">
-        <Link className="ink-link reg-label" to="/">
+    <main {...stylex.props(styles.article)}>
+      <div {...stylex.props(styles.crumb)}>
+        <Link {...stylex.props(shared.inkLink, shared.regLabel)} to="/">
           ← Index
         </Link>
       </div>
 
       {parsedDate || hasTags ? (
-        <div className="folio">
+        <div {...stylex.props(styles.folio)}>
           {parsedDate ? (
-            <FormattedTime className="reg-label" dateTime={parsedDate} />
+            <FormattedTime {...stylex.props(shared.regLabel)} dateTime={parsedDate} />
           ) : null}
           {hasTags ? (
-            <span className="reg-label">{tags!.join(' · ')}</span>
+            <span {...stylex.props(shared.regLabel)}>{tags!.join(' · ')}</span>
           ) : null}
         </div>
       ) : null}
 
-      <h1 className="a-title">{title}</h1>
-      {description ? <p className="a-lede">{description}</p> : null}
+      <h1 {...stylex.props(styles.title)}>{title}</h1>
+      {description ? <p {...stylex.props(styles.lede)}>{description}</p> : null}
 
       <article className="md-reader">
         <Reader contentComponent={contentComponent} />

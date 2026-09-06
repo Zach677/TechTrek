@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
+import * as stylex from '@stylexjs/stylex'
 
+import { colors, typeScale } from '../design-system/tokens.stylex'
 import { daypart, fmtTime, moonPhase } from '@/lib/almanac'
 
 interface Now {
@@ -8,6 +10,20 @@ interface Now {
   glyph: string
   phase: string
 }
+
+const styles = stylex.create({
+  line: {
+    marginTop: '3rem',
+    fontStyle: 'italic',
+    fontSize: typeScale.copy15,
+    lineHeight: typeScale.copy15Lh,
+    color: colors.secondary,
+  },
+  moon: {
+    color: colors.accent,
+    fontStyle: 'normal',
+  },
+})
 
 // The almanac's living footer line: refreshes every 30s and remembers how many
 // times this browser has opened the page. SSG-safe — renders static placeholders
@@ -47,9 +63,9 @@ export function AboutNow() {
   }, [])
 
   return (
-    <p className="now-line">
+    <p {...stylex.props(styles.line)}>
       Right now it’s {now ? now.part : '—'} here — {now ? now.time : '--:--'},
-      under a <span className="moon">{now ? now.glyph : '☽'}</span>{' '}
+      under a <span {...stylex.props(styles.moon)}>{now ? now.glyph : '☽'}</span>{' '}
       {now ? now.phase : 'crescent'}.{' '}
       {visits > 1
         ? `You’ve opened this almanac ${visits} times now. `

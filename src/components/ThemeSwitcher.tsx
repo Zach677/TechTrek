@@ -1,7 +1,68 @@
 import { type MouseEventHandler, useSyncExternalStore } from 'react'
-import clsx from 'clsx'
+import * as stylex from '@stylexjs/stylex'
 import { type IconType, Icon } from '@/components/Icon'
 import { type Theme, themeManager } from '@/theme'
+import { colors } from '../design-system/tokens.stylex'
+
+const styles = stylex.create({
+  root: {
+    // view-transition-name for theme chrome
+    viewTransitionName: 'theme-switcher',
+    position: 'relative',
+    padding: '2px',
+    backgroundColor: colors.separator,
+    borderRadius: '9999px',
+    boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.06)',
+  },
+  thumb: {
+    position: 'absolute',
+    width: '30px',
+    height: '30px',
+    backgroundColor: colors.paper,
+    boxShadow: '0 1px 2px rgba(0,0,0,0.12)',
+    borderRadius: '9999px',
+    zIndex: 10,
+    transition: 'background-color 0.3s, left 0.3s var(--ease-spring) 0s',
+  },
+  row: {
+    position: 'relative',
+    display: 'flex',
+    zIndex: 20,
+  },
+  button: {
+    position: 'relative',
+    display: 'flex',
+    width: '30px',
+    height: '30px',
+    alignItems: 'center',
+    justifyContent: 'center',
+    cursor: 'pointer',
+    borderWidth: 0,
+    backgroundColor: 'transparent',
+    transition: 'color 0.2s var(--ease)',
+    '::after': {
+      content: {
+        default: null,
+        '@media (pointer: coarse)': '""',
+      },
+      position: 'absolute',
+      inset: '-8px',
+      display: {
+        default: 'none',
+        '@media (pointer: coarse)': 'block',
+      },
+    },
+  },
+  active: {
+    color: colors.heading,
+  },
+  inactive: {
+    color: {
+      default: colors.secondary,
+      ':hover': colors.heading,
+    },
+  },
+})
 
 function ThemeRadioButton({
   active,
@@ -16,13 +77,7 @@ function ThemeRadioButton({
 }) {
   return (
     <button
-      className={clsx(
-        {
-          'text-primary': active,
-          'text-secondary': !active,
-        },
-        'flex w-[30px] h-[30px] items-center justify-center cursor-pointer hover:text-primary transition-colors duration-200',
-      )}
+      {...stylex.props(styles.button, active ? styles.active : styles.inactive)}
       role="radio"
       aria-label={title}
       aria-checked={active}
@@ -53,18 +108,13 @@ export function ThemeSwitcher() {
   }
 
   return (
-    <div
-      className="theme-switcher relative p-0.5 bg-separator inset-shadow-xs rounded-full"
-      aria-label="Theme Switcher"
-    >
+    <div {...stylex.props(styles.root)} aria-label="Theme Switcher">
       <div
-        className="theme-switcher-thumb absolute w-[30px] h-[30px] bg-background shadow rounded-full z-10"
-        style={{
-          left: INDICATOR_OFFSET_MAP[currentTheme],
-        }}
+        {...stylex.props(styles.thumb)}
+        style={{ left: INDICATOR_OFFSET_MAP[currentTheme] }}
       />
 
-      <div className="relative flex z-20">
+      <div {...stylex.props(styles.row)}>
         <ThemeRadioButton
           active={currentTheme === 'dark'}
           icon="moon"
