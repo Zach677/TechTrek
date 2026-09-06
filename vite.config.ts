@@ -1,10 +1,11 @@
 import path from 'node:path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import stylex from '@stylexjs/unplugin'
 import tailwindcss from '@tailwindcss/vite'
 import mdx from '@mdx-js/rollup'
 import remarkGfm from 'remark-gfm'
-import rehypePrettyCode, { Options } from 'rehype-pretty-code'
+import rehypePrettyCode, { type Options } from 'rehype-pretty-code'
 
 import { postProvider, pageProvider } from './plugins/content-provider'
 
@@ -15,6 +16,10 @@ export default defineConfig({
     },
   },
   plugins: [
+    // StyleX before React to preserve Fast Refresh (StyleX Vite docs).
+    stylex.vite({
+      useCSSLayers: true,
+    }),
     react(),
     tailwindcss(),
     mdx({

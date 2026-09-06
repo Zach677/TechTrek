@@ -9,9 +9,9 @@ interface ThemeManager {
 
 const LOCAL_STORAGE_KEY = 'app_theme'
 
-// paper "sheet" (light) and kraft (dark) — used for the mobile browser chrome
-const LIGHT_THEME_COLOR = '#f1e9d6'
-const DARK_THEME_COLOR = '#2a2318'
+// Yohaku paper (light) / inverted paper (dark) — mobile browser chrome
+const LIGHT_THEME_COLOR = '#f9f8f5'
+const DARK_THEME_COLOR = '#141312'
 
 const listeners = new Set<() => void>()
 let currentTheme: Theme = 'system'
