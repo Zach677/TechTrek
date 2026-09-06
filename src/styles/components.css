@@ -209,18 +209,6 @@
     max-width: 36rem;
   }
 
-  /* accent drop cap on the article's lead paragraph */
-  .md-reader > p:first-of-type::first-letter {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 500;
-    font-size: 3.4em;
-    line-height: 0.8;
-    float: left;
-    padding: 0.08em 0.12em 0 0;
-    color: var(--color-accent);
-  }
-
   /* marginalia at wide widths (opt-in: wrap text in <span class="marginalia">
      inside a `.note-anchor` paragraph) */
   .note-anchor {
@@ -518,6 +506,14 @@
 
   /* comfortable tap targets on touch screens */
   @media (pointer: coarse) {
+    .nav .links a {
+      position: relative;
+    }
+    .nav .links a::after {
+      content: '';
+      position: absolute;
+      inset: -12px -10px;
+    }
     .theme-switcher button {
       position: relative;
     }
@@ -614,20 +610,12 @@
       font-family: var(--font-mono);
       font-size: 0.9em;
       font-weight: 500;
-
-      &::before,
-      &::after {
-        content: '`';
-      }
     }
 
-    pre {
-      code {
-        &::before,
-        &::after {
-          content: none;
-        }
-      }
+    :not(pre) > code {
+      background-color: var(--color-ink-wash);
+      padding: 0.12em 0.38em;
+      border-radius: 0.2em;
     }
 
     blockquote {
