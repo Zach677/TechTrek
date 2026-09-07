@@ -2,11 +2,11 @@ import { lazy } from 'react'
 import { type RouteObject } from 'react-router'
 
 import RootLayout from './pages/layout'
+import RootPage from './pages/index'
 import NotFound from './pages/not-found'
 import ErrorBoundary from './pages/error'
 import type { RouteObjectWithMetadata } from './metadata/types'
 
-const RootPage = lazy(() => import('./pages/index'))
 const ProjectsPage = lazy(() => import('./pages/projects'))
 const AboutPage = lazy(() => import('./pages/about'))
 const NowPage = lazy(() => import('./pages/now'))
@@ -21,9 +21,8 @@ const routes: RouteObject[] = [
         index: true,
         Component: RootPage,
         metadata: {
-          title: 'zaxh',
           description:
-            "Zach's personal hub — projects, about, and what I'm doing now.",
+            'Zach\'s personal hub — projects, about, and what I\'m doing now.',
           url: 'https://zaxh.org',
         },
       } as RouteObjectWithMetadata,
@@ -50,7 +49,7 @@ const routes: RouteObject[] = [
         Component: NowPage,
         metadata: {
           title: 'Now',
-          description: "What Zach is doing these days.",
+          description: 'What Zach is doing these days.',
           url: 'https://zaxh.org/now',
         },
       } as RouteObjectWithMetadata,

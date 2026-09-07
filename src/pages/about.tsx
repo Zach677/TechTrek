@@ -11,14 +11,7 @@ const styles = stylex.create({
     maxWidth: '42rem',
   },
   hello: {
-    fontFamily: fonts.serif,
-    fontStyle: 'italic',
-    fontWeight: 500,
-    fontSize: 'clamp(1.85rem, 4.5vw, 2.75rem)',
-    lineHeight: 1.15,
-    letterSpacing: '-0.01em',
     margin: '1.25rem 0 1.5rem',
-    color: colors.heading,
   },
   accent: {
     color: colors.accent,
@@ -89,7 +82,7 @@ const styles = stylex.create({
 export default function AboutPage() {
   return (
     <main {...stylex.props(styles.main)}>
-      <h1 {...stylex.props(styles.hello)}>
+      <h1 {...stylex.props(shared.pageTitle, styles.hello)}>
         Hey, I&apos;m <span {...stylex.props(styles.accent)}>Zach</span>.
       </h1>
 

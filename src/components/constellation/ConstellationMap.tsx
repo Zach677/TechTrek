@@ -6,12 +6,12 @@ import { colors, fonts, typeScale } from '../../design-system/tokens.stylex'
 import {
   calloutSide,
   centerPoint,
-  layoutProject,
+  layoutProjects,
+  polarAngle,
   projectCallout,
   projectHref,
   type MapPoint,
 } from './layout'
-import './constellation.css'
 
 const STAR_FIELD: { x: number; y: number; cross?: boolean }[] = [
   { x: 8, y: 12 },
@@ -94,17 +94,18 @@ export function ConstellationMap({
   const [active, setActive] = useState<string | null>(null)
   const center = centerPoint()
 
-  const nodes = useMemo(
-    () =>
-      projects.map((project, index) => ({
+  const nodes = useMemo(() => {
+    const points = layoutProjects(projects, mode)
+    return projects
+      .map((project, index) => ({
         project,
-        point: layoutProject(project, index, projects.length, mode),
+        point: points[index] ?? { x: 50, y: 50 },
         href: projectHref(project),
         callout: projectCallout(project),
         drift: driftVars(project.slug, index),
-      })),
-    [projects, mode],
-  )
+      }))
+      .sort((a, b) => polarAngle(a.point) - polarAngle(b.point))
+  }, [projects, mode])
 
   const activeNode = nodes.find((n) => n.project.slug === active)
 
@@ -137,16 +138,15 @@ export function ConstellationMap({
           </>
         ) : null}
 
-        <svg className="cx-edges" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <svg className="cx-edges" aria-hidden="true">
           {nodes.map((n, i) => (
             <line
               key={n.project.slug}
               className="cx-edge"
-              x1={center.x}
-              y1={center.y}
-              x2={n.point.x}
-              y2={n.point.y}
-              pathLength={1}
+              x1={`${center.x}%`}
+              y1={`${center.y}%`}
+              x2={`${n.point.x}%`}
+              y2={`${n.point.y}%`}
               style={{ animationDelay: `${40 + i * 60}ms` }}
             />
           ))}

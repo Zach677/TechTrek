@@ -12,10 +12,40 @@ const FEATURED_LAYOUT: Record<string, MapPoint> = {
   'snell-panel': { x: 22, y: 54 },
 }
 
+/**
+ * Hand-tuned dense map for the current public set.
+ * Two rings, labels hang below the ring — keep ≥18% between anchors.
+ */
+const DENSE_LAYOUT: Record<string, MapPoint> = {
+  'eevee-spotify': { x: 50, y: 14 },
+  mitori: { x: 28, y: 28 },
+  'zach-skills': { x: 10, y: 34 },
+  'apple-package': { x: 72, y: 26 },
+  'modern-appkit': { x: 90, y: 36 },
+  'snell-panel': { x: 16, y: 52 },
+  'modern-uikit': { x: 84, y: 54 },
+  'homebrew-star': { x: 50, y: 68 },
+  dotfiles: { x: 14, y: 74 },
+  'zaxh-org': { x: 86, y: 74 },
+  'cet-system': { x: 30, y: 86 },
+}
+
 const CENTER: MapPoint = { x: 50, y: 50 }
+const FEATURED_MIN_R = 26
+const FEATURED_MAX_R = 36
+/** Dense max must not shrink below the featured ring. */
+const DENSE_MIN_R = 24
+const DENSE_MAX_R = 44
+const MIN_SEPARATION = 18
 
 export function centerPoint(): MapPoint {
   return CENTER
+}
+
+/** Polar angle from center, 0 at top, clockwise — for tab order. */
+export function polarAngle(point: MapPoint): number {
+  const a = Math.atan2(point.y - CENTER.y, point.x - CENTER.x)
+  return (a + Math.PI * 2.5) % (Math.PI * 2)
 }
 
 function hashSlug(slug: string): number {
@@ -25,6 +55,105 @@ function hashSlug(slug: string): number {
     h = Math.imul(h, 16777619)
   }
   return h >>> 0
+}
+
+function clampPoint(point: MapPoint): MapPoint {
+  return {
+    x: Math.round(Math.min(92, Math.max(8, point.x)) * 10) / 10,
+    y: Math.round(Math.min(90, Math.max(12, point.y)) * 10) / 10,
+  }
+}
+
+/** Even angles + staggered radius so neighbors don't share a ring. */
+function polarSlot(
+  project: Project,
+  index: number,
+  total: number,
+  minR: number,
+  maxR: number,
+): MapPoint {
+  const h = hashSlug(project.slug)
+  const angle =
+    (index / Math.max(total, 1)) * Math.PI * 2 - Math.PI / 2
+  const t = (h % 100) / 100
+  const inner = index % 2 === 0
+  const r = inner
+    ? minR + (maxR - minR) * (0.15 + t * 0.25)
+    : minR + (maxR - minR) * (0.65 + t * 0.3)
+  const squash = 0.92
+  return clampPoint({
+    x: 50 + Math.cos(angle) * r,
+    y: 50 + Math.sin(angle) * r * squash,
+  })
+}
+
+function separate(points: MapPoint[], minDist: number, rounds = 16): MapPoint[] {
+  const pts = points.map((p) => ({ ...p }))
+  for (let round = 0; round < rounds; round++) {
+    for (let i = 0; i < pts.length; i++) {
+      for (let j = i + 1; j < pts.length; j++) {
+        const dx = pts[j].x - pts[i].x
+        const dy = pts[j].y - pts[i].y
+        const d = Math.hypot(dx, dy) || 0.01
+        if (d >= minDist) continue
+        const push = (minDist - d) / 2
+        const nx = dx / d
+        const ny = dy / d
+        pts[i].x -= nx * push
+        pts[i].y -= ny * push
+        pts[j].x += nx * push
+        pts[j].y += ny * push
+      }
+      const cdx = pts[i].x - CENTER.x
+      const cdy = pts[i].y - CENTER.y
+      const cd = Math.hypot(cdx, cdy) || 0.01
+      if (cd < 16) {
+        const push = 16 - cd
+        pts[i].x += (cdx / cd) * push
+        pts[i].y += (cdy / cd) * push
+      }
+    }
+  }
+  return pts.map(clampPoint)
+}
+
+function layoutFeatured(projects: Project[]): MapPoint[] {
+  return projects.map((project, index) => {
+    const tuned = FEATURED_LAYOUT[project.slug]
+    if (tuned) return tuned
+    return polarSlot(project, index, projects.length, FEATURED_MIN_R, FEATURED_MAX_R)
+  })
+}
+
+function layoutDense(projects: Project[]): MapPoint[] {
+  const allTuned = projects.every((p) => DENSE_LAYOUT[p.slug])
+  if (allTuned) {
+    return projects.map((p) => DENSE_LAYOUT[p.slug]!)
+  }
+
+  const seeded = projects.map((project, index) => {
+    const tuned = DENSE_LAYOUT[project.slug]
+    if (tuned) return { ...tuned }
+    return polarSlot(project, index, projects.length, DENSE_MIN_R, DENSE_MAX_R)
+  })
+  return separate(seeded, MIN_SEPARATION)
+}
+
+/** Positions for every project in the given mode, same order as `projects`. */
+export function layoutProjects(
+  projects: Project[],
+  mode: 'featured' | 'dense',
+): MapPoint[] {
+  switch (mode) {
+  case 'featured':
+    return layoutFeatured(projects)
+  case 'dense':
+    return layoutDense(projects)
+  default: {
+    const _exhaustive: never = mode
+    return _exhaustive
+  }
+  }
 }
 
 /**
@@ -37,27 +166,21 @@ export function layoutProject(
   total: number,
   mode: 'featured' | 'dense',
 ): MapPoint {
-  if (mode === 'featured' && FEATURED_LAYOUT[project.slug]) {
-    return FEATURED_LAYOUT[project.slug]
+  switch (mode) {
+  case 'featured': {
+    const tuned = FEATURED_LAYOUT[project.slug]
+    if (tuned) return tuned
+    return polarSlot(project, index, total, FEATURED_MIN_R, FEATURED_MAX_R)
   }
-
-  const h = hashSlug(project.slug)
-  const golden = 2.399963229728653 // ≈ golden angle in radians
-  const baseAngle = (index * golden + (h % 360) * 0.0174532925) % (Math.PI * 2)
-  // Radius band: featured ring ~28–36; dense ring expands with count
-  const minR = mode === 'featured' ? 26 : 18
-  const maxR = mode === 'featured' ? 36 : Math.min(42, 16 + total * 1.4)
-  const t = total <= 1 ? 0.5 : index / Math.max(total - 1, 1)
-  const radius = minR + (maxR - minR) * (0.35 + 0.65 * ((h % 100) / 100))
-  // Slight radial jitter so it isn't a clean spiral
-  const jitter = ((h >> 8) % 7) - 3
-  const r = Math.min(maxR, Math.max(minR, radius + jitter * 0.4 + t * 2))
-
-  const x = 50 + Math.cos(baseAngle) * r
-  const y = 50 + Math.sin(baseAngle) * r * 0.92 // slight vertical squash
-  return {
-    x: Math.round(Math.min(92, Math.max(8, x)) * 10) / 10,
-    y: Math.round(Math.min(90, Math.max(12, y)) * 10) / 10,
+  case 'dense': {
+    const tuned = DENSE_LAYOUT[project.slug]
+    if (tuned) return tuned
+    return polarSlot(project, index, total, DENSE_MIN_R, DENSE_MAX_R)
+  }
+  default: {
+    const _exhaustive: never = mode
+    return _exhaustive
+  }
   }
 }
 

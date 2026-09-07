@@ -18,14 +18,7 @@ const styles = stylex.create({
     maxWidth: '42rem',
   },
   title: {
-    fontFamily: fonts.serif,
-    fontStyle: 'italic',
-    fontWeight: 500,
-    fontSize: 'clamp(1.85rem, 4.5vw, 2.75rem)',
-    lineHeight: 1.15,
-    letterSpacing: '-0.01em',
     margin: '1.25rem 0 0.65rem',
-    color: colors.heading,
   },
   lede: {
     margin: '0 0 2rem',
@@ -113,7 +106,7 @@ export default function NowPage() {
 
   return (
     <main {...stylex.props(styles.main)}>
-      <h1 {...stylex.props(styles.title)}>Now</h1>
+      <h1 {...stylex.props(shared.pageTitle, styles.title)}>Now</h1>
       <p {...stylex.props(styles.lede)}>
         A living snapshot — what I&apos;m doing these days, not a changelog.
       </p>

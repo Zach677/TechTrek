@@ -1,6 +1,6 @@
 import * as stylex from '@stylexjs/stylex'
 
-import { colors, fonts } from '../design-system/tokens.stylex'
+import { colors } from '../design-system/tokens.stylex'
 import { shared } from '../design-system/shared.stylex'
 
 const styles = stylex.create({
@@ -8,14 +8,7 @@ const styles = stylex.create({
     maxWidth: '42rem',
   },
   hello: {
-    fontFamily: fonts.serif,
-    fontStyle: 'italic',
-    fontWeight: 500,
-    fontSize: 'clamp(2.5rem, 6.5vw, 4.2rem)',
-    lineHeight: 1.1,
-    letterSpacing: '-0.01em',
     margin: '2rem 0 1rem',
-    color: colors.heading,
   },
   accent: {
     color: colors.accent,
@@ -28,7 +21,7 @@ const styles = stylex.create({
 export default function MitoriPrivacyPage() {
   return (
     <main {...stylex.props(styles.main)}>
-      <h1 {...stylex.props(styles.hello)}>
+      <h1 {...stylex.props(shared.pageTitle, styles.hello)}>
         <span {...stylex.props(styles.accent)}>Mitori</span> Privacy Policy
       </h1>
       <p {...stylex.props(shared.regLabel, styles.updated)}>
