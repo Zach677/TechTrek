@@ -20,6 +20,7 @@ const routes: RouteObject[] = [
       {
         index: true,
         Component: RootPage,
+        handle: { bare: true },
         metadata: {
           description:
             'Zach\'s personal hub — projects, about, and what I\'m doing now.',

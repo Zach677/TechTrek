@@ -74,6 +74,7 @@ export const projects: Project[] = [
     slug: 'modern-appkit',
     name: 'Modern.AppKit',
     oneLiner: 'Companion AppKit starter alongside Modern.UIKit.',
+    callout: 'AppKit starter alongside UIKit',
     status: 'active',
     tags: ['Swift', 'AppKit', 'macOS'],
     links: [{ label: 'GitHub', url: 'https://github.com/Zach677/Modern.AppKit' }],
@@ -94,6 +95,7 @@ export const projects: Project[] = [
     slug: 'eevee-spotify',
     name: 'EeveeSpotifyReincarnated',
     oneLiner: 'Enhancing the Spotify experience on iOS via sideload sources.',
+    callout: 'Spotify sideload on iOS',
     status: 'paused',
     tags: ['iOS', 'Spotify'],
     links: [
@@ -108,6 +110,7 @@ export const projects: Project[] = [
     slug: 'zach-skills',
     name: 'Zach-Skills',
     oneLiner: 'Personal AI agent skills collection.',
+    callout: 'personal agent skills',
     status: 'paused',
     tags: ['Python', 'Agents'],
     links: [{ label: 'GitHub', url: 'https://github.com/Zach677/Zach-Skills' }],
@@ -117,6 +120,7 @@ export const projects: Project[] = [
     slug: 'cet-system',
     name: 'CET-System',
     oneLiner: 'CET exam tooling and workflow helpers.',
+    callout: 'CET exam tooling',
     status: 'paused',
     tags: ['TypeScript'],
     links: [{ label: 'GitHub', url: 'https://github.com/Zach677/CET-System' }],
@@ -126,6 +130,7 @@ export const projects: Project[] = [
     slug: 'dotfiles',
     name: 'dotfiles',
     oneLiner: 'Machine setup, shell config, and everyday CLI defaults.',
+    callout: 'machine setup, everyday CLI',
     status: 'paused',
     tags: ['Shell', 'dotfiles'],
     links: [{ label: 'GitHub', url: 'https://github.com/Zach677/dotfiles' }],
@@ -218,6 +223,7 @@ export const projects: Project[] = [
     slug: 'zaxh-org',
     name: 'zaxh.org',
     oneLiner: 'This site — personal hub, quiet paper.',
+    callout: 'this site — quiet paper',
     status: 'active',
     tags: ['React', 'Vite', 'StyleX'],
     links: [{ label: 'GitHub', url: 'https://github.com/Zach677/zaxh.org' }],
@@ -225,11 +231,14 @@ export const projects: Project[] = [
   },
 ]
 
-export function featuredProjects(limit?: number): Project[] {
-  const featured = projects.filter((p) => p.featured)
-  return limit == null ? featured : featured.slice(0, limit)
+export function featuredProjects(): Project[] {
+  return projects.filter((p) => p.featured)
 }
 
 export function publicProjects(): Project[] {
   return projects.filter((p) => p.visibility !== 'private')
+}
+
+export function privateProjects(): Project[] {
+  return projects.filter((p) => p.visibility === 'private')
 }

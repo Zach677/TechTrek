@@ -81,6 +81,48 @@
     user-select: none;
   }
 
+  .cx-legend {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    gap: 0.9rem;
+    font-family: var(--font-mono);
+    font-size: var(--text-caption-10);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: color-mix(in oklab, var(--color-neutral-6) 80%, transparent);
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .cx-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .cx-legend .cx-ring {
+    display: block;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    border: 1.25px solid var(--cx-node-ring);
+    background: transparent;
+    flex-shrink: 0;
+  }
+
+  .cx-legend .cx-ring.is-sm {
+    width: 7px;
+    height: 7px;
+    opacity: 0.55;
+  }
+
+  .cx-graph {
+    position: absolute;
+    inset: 0;
+  }
+
   .cx-edges {
     position: absolute;
     inset: 0;
@@ -148,6 +190,18 @@
       transform 0.15s var(--ease);
   }
 
+  .cx-node.is-lg .cx-ring {
+    width: 13px;
+    height: 13px;
+    border-color: color-mix(in oklab, var(--cx-node-ring) 55%, var(--cx-accent));
+  }
+
+  .cx-node.is-sm .cx-ring {
+    width: 7px;
+    height: 7px;
+    opacity: 0.55;
+  }
+
   .cx-label {
     position: absolute;
     top: calc(100% + 0.4rem);
@@ -199,15 +253,22 @@
     z-index: 5;
     pointer-events: none;
     opacity: 0;
-    transform: translateY(2px);
-    transition:
-      opacity 0.15s var(--ease),
-      transform 0.15s var(--ease);
+    animation: cx-callout-in 0.18s var(--ease) forwards;
   }
 
-  .cx-callout.is-visible {
+  .cx-callout.is-pinned {
+    animation: none;
+    opacity: 0.4;
+  }
+
+  .cx-callout.is-hot {
+    animation: cx-callout-in 0.18s var(--ease) forwards;
     opacity: 1;
-    transform: translateY(0);
+  }
+
+  .cx-callout.is-pinned.is-hot {
+    animation: none;
+    opacity: 1;
   }
 
   .cx-leader {
@@ -242,10 +303,8 @@
     text-overflow: ellipsis;
   }
 
-  /* Idle drift — unique delays/directions per node via --cx-drift-* */
   .cx-drift {
-    animation: cx-idle-drift var(--cx-drift-dur, 7s) ease-in-out
-      var(--cx-drift-delay, 0s) infinite alternate;
+    animation: cx-idle-drift 8s ease-in-out infinite alternate;
   }
 
   @keyframes cx-idle-drift {
@@ -253,7 +312,7 @@
       translate: 0 0;
     }
     to {
-      translate: var(--cx-drift-x, 3px) var(--cx-drift-y, -2px);
+      translate: 3px -2px;
     }
   }
 
@@ -278,6 +337,17 @@
     }
   }
 
+  @keyframes cx-callout-in {
+    from {
+      opacity: 0;
+      transform: translateY(2px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   @keyframes cx-now-blink {
     0%,
     100% {
@@ -289,6 +359,7 @@
   }
 
   .cx-now-dot {
+    --cx-accent: var(--color-accent);
     width: 7px;
     height: 7px;
     border-radius: 50%;
@@ -307,7 +378,8 @@
     .cx-drift,
     .cx-pulse,
     .cx-edge,
-    .cx-now-dot {
+    .cx-now-dot,
+    .cx-callout {
       animation: none !important;
     }
 
@@ -321,7 +393,15 @@
     }
 
     .cx-callout {
-      transition: none;
+      opacity: 1;
+    }
+
+    .cx-callout.is-pinned {
+      opacity: 0.4;
+    }
+
+    .cx-callout.is-hot {
+      opacity: 1;
     }
   }
 

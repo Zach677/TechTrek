@@ -1,15 +1,23 @@
-import type { Project } from '../../../data/projects'
+import type { Project, ProjectStatus } from '../../../data/projects'
 
 /** Normalized map coordinates (0–100). Center is (50, 50). */
 export type MapPoint = { x: number; y: number }
 
+export type MapEdge = {
+  key: string
+  from: MapPoint
+  to: MapPoint
+}
+
+export type NodeWeight = 'lg' | 'md' | 'sm'
+
 /** Hand-tuned organic positions matching approved constellation mocks. */
 const FEATURED_LAYOUT: Record<string, MapPoint> = {
-  mitori: { x: 30, y: 26 },
-  'apple-package': { x: 70, y: 30 },
-  'modern-uikit': { x: 78, y: 52 },
-  'homebrew-star': { x: 54, y: 74 },
-  'snell-panel': { x: 22, y: 54 },
+  mitori: { x: 24, y: 20 },
+  'apple-package': { x: 76, y: 22 },
+  'modern-uikit': { x: 86, y: 54 },
+  'homebrew-star': { x: 50, y: 80 },
+  'snell-panel': { x: 14, y: 56 },
 }
 
 /**
@@ -30,17 +38,14 @@ const DENSE_LAYOUT: Record<string, MapPoint> = {
   'cet-system': { x: 30, y: 86 },
 }
 
-const CENTER: MapPoint = { x: 50, y: 50 }
-const FEATURED_MIN_R = 26
-const FEATURED_MAX_R = 36
+export const CENTER: MapPoint = { x: 50, y: 50 }
+const FEATURED_MIN_R = 30
+const FEATURED_MAX_R = 44
 /** Dense max must not shrink below the featured ring. */
 const DENSE_MIN_R = 24
 const DENSE_MAX_R = 44
 const MIN_SEPARATION = 18
-
-export function centerPoint(): MapPoint {
-  return CENTER
-}
+const HUB_SPOKES = 2
 
 /** Polar angle from center, 0 at top, clockwise — for tab order. */
 export function polarAngle(point: MapPoint): number {
@@ -64,6 +69,10 @@ function clampPoint(point: MapPoint): MapPoint {
   }
 }
 
+function dist(a: MapPoint, b: MapPoint): number {
+  return Math.hypot(a.x - b.x, a.y - b.y)
+}
+
 /** Even angles + staggered radius so neighbors don't share a ring. */
 function polarSlot(
   project: Project,
@@ -73,8 +82,7 @@ function polarSlot(
   maxR: number,
 ): MapPoint {
   const h = hashSlug(project.slug)
-  const angle =
-    (index / Math.max(total, 1)) * Math.PI * 2 - Math.PI / 2
+  const angle = (index / Math.max(total, 1)) * Math.PI * 2 - Math.PI / 2
   const t = (h % 100) / 100
   const inner = index % 2 === 0
   const r = inner
@@ -121,7 +129,13 @@ function layoutFeatured(projects: Project[]): MapPoint[] {
   return projects.map((project, index) => {
     const tuned = FEATURED_LAYOUT[project.slug]
     if (tuned) return tuned
-    return polarSlot(project, index, projects.length, FEATURED_MIN_R, FEATURED_MAX_R)
+    return polarSlot(
+      project,
+      index,
+      projects.length,
+      FEATURED_MIN_R,
+      FEATURED_MAX_R,
+    )
   })
 }
 
@@ -156,32 +170,75 @@ export function layoutProjects(
   }
 }
 
+type EdgeNode = {
+  slug: string
+  point: MapPoint
+  featured?: boolean
+}
+
+function mst(nodes: EdgeNode[]): MapEdge[] {
+  if (nodes.length < 2) return []
+  const inTree = new Set<number>([0])
+  const edges: MapEdge[] = []
+  while (inTree.size < nodes.length) {
+    let bestI = 0
+    let bestJ = -1
+    let bestD = Infinity
+    for (const i of inTree) {
+      for (let j = 0; j < nodes.length; j++) {
+        if (inTree.has(j)) continue
+        const d = dist(nodes[i].point, nodes[j].point)
+        if (d < bestD) {
+          bestD = d
+          bestI = i
+          bestJ = j
+        }
+      }
+    }
+    if (bestJ < 0) break
+    inTree.add(bestJ)
+    edges.push({
+      key: `${nodes[bestI].slug}~${nodes[bestJ].slug}`,
+      from: nodes[bestI].point,
+      to: nodes[bestJ].point,
+    })
+  }
+  return edges
+}
+
+function nearest(origin: MapPoint, nodes: EdgeNode[], k: number): EdgeNode[] {
+  return [...nodes]
+    .sort((a, b) => dist(origin, a.point) - dist(origin, b.point))
+    .slice(0, k)
+}
+
 /**
- * Deterministic polar layout for denser maps — organic, not a perfect circle.
- * Avoids center collision and keeps nodes inside a safe ring.
+ * Constellation strokes: MST among project nodes, plus 1–2 spokes from zach
+ * to the nearest featured (or nearest any) stars.
  */
-export function layoutProject(
-  project: Project,
-  index: number,
-  total: number,
-  mode: 'featured' | 'dense',
-): MapPoint {
-  switch (mode) {
-  case 'featured': {
-    const tuned = FEATURED_LAYOUT[project.slug]
-    if (tuned) return tuned
-    return polarSlot(project, index, total, FEATURED_MIN_R, FEATURED_MAX_R)
-  }
-  case 'dense': {
-    const tuned = DENSE_LAYOUT[project.slug]
-    if (tuned) return tuned
-    return polarSlot(project, index, total, DENSE_MIN_R, DENSE_MAX_R)
-  }
-  default: {
-    const _exhaustive: never = mode
-    return _exhaustive
-  }
-  }
+export function layoutEdges(center: MapPoint, nodes: EdgeNode[]): MapEdge[] {
+  const chain = mst(nodes)
+  const featured = nodes.filter((n) => n.featured)
+  const hubs = nearest(
+    center,
+    featured.length ? featured : nodes,
+    HUB_SPOKES,
+  )
+  const spokes = hubs.map((n) => ({
+    key: `zach~${n.slug}`,
+    from: center,
+    to: n.point,
+  }))
+  return [...chain, ...spokes]
+}
+
+export function nodeWeight(
+  featured: boolean | undefined,
+  status: ProjectStatus,
+): NodeWeight {
+  if (featured) return 'lg'
+  if (status === 'active') return 'md'
+  return 'sm'
 }
 
 export function projectHref(project: Project): string | undefined {
@@ -189,14 +246,37 @@ export function projectHref(project: Project): string | undefined {
   return link?.url
 }
 
-export function projectCallout(project: Project): string {
-  if (project.callout) return project.callout
-  const raw = project.oneLiner
-  if (raw.length <= 42) return raw
-  return `${raw.slice(0, 39).trimEnd()}…`
+function clipAtWord(raw: string, max = 42): string {
+  if (raw.length <= max) return raw
+  const slice = raw.slice(0, max)
+  const sp = slice.lastIndexOf(' ')
+  const cut = sp > 16 ? slice.slice(0, sp) : slice
+  return `${cut.trimEnd()}…`
 }
 
-/** Prefer callout side with more horizontal room. */
+export function projectCallout(project: Project): string {
+  if (project.callout) return project.callout
+  return clipAtWord(project.oneLiner)
+}
+
+/**
+ * Prefer the side with more remaining room, so outer nodes call toward center.
+ */
 export function calloutSide(point: MapPoint): 'left' | 'right' {
-  return point.x >= 50 ? 'right' : 'left'
+  return point.x < 50 ? 'right' : 'left'
+}
+
+/** Two interior nodes, one per half — used as always-on atlas notes. */
+export function pickPinned<T extends { point: MapPoint }>(
+  nodes: T[],
+  count = 2,
+): T[] {
+  if (nodes.length <= count) return nodes
+  const left = nodes
+    .filter((n) => n.point.x < 50)
+    .sort((a, b) => b.point.x - a.point.x)[0]
+  const right = nodes
+    .filter((n) => n.point.x >= 50)
+    .sort((a, b) => a.point.x - b.point.x)[0]
+  return [left, right].filter((n): n is T => n != null).slice(0, count)
 }

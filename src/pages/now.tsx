@@ -4,6 +4,7 @@ import { Link } from 'react-router'
 
 import { colors, fonts, typeScale } from '../design-system/tokens.stylex'
 import { shared } from '../design-system/shared.stylex'
+import { NOW } from '../../data/now-status'
 import { daypart, fmtTime, moonPhase } from '@/lib/almanac'
 
 interface NowClock {
@@ -114,15 +115,11 @@ export default function NowPage() {
       <div {...stylex.props(styles.body)}>
         <p {...stylex.props(styles.p)}>Right now I&apos;m focused on:</p>
         <ul {...stylex.props(styles.list)}>
-          <li {...stylex.props(styles.li)}>
-            Turning zaxh.org into a quiet personal hub (this site).
-          </li>
-          <li {...stylex.props(styles.li)}>
-            Shipping and polishing mitori and ApplePackage on macOS / Swift.
-          </li>
-          <li {...stylex.props(styles.li)}>
-            Small private tools — bookkeeping, WeChat posts, agent skills.
-          </li>
+          {NOW.map((item) => (
+            <li key={item} {...stylex.props(styles.li)}>
+              {item}
+            </li>
+          ))}
         </ul>
         <p {...stylex.props(styles.p)}>
           Still writing code so the cat and dog can have a better life. More

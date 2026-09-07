@@ -1,10 +1,11 @@
 import * as stylex from '@stylexjs/stylex'
+import { Link } from 'react-router'
 
 import { ConstellationMap } from '@/components/constellation'
 import { colors, fonts, typeScale } from '../design-system/tokens.stylex'
 import { shared } from '../design-system/shared.stylex'
 import {
-  projects,
+  privateProjects,
   publicProjects,
   type Project,
   type ProjectStatus,
@@ -31,6 +32,12 @@ const styles = stylex.create({
     fontSize: typeScale.copy14,
     lineHeight: typeScale.copy14Lh,
     color: colors.secondary,
+  },
+  ledeMap: {
+    display: {
+      default: 'none',
+      '@media (min-width: 640px)': 'inline',
+    },
   },
   mapFrame: {
     width: '100%',
@@ -110,6 +117,13 @@ const styles = stylex.create({
     lineHeight: typeScale.copy13Lh,
     color: colors.body,
   },
+  privateWrap: {
+    marginTop: '1.75rem',
+  },
+  privateSummary: {
+    cursor: 'pointer',
+    listStyle: 'none',
+  },
 })
 
 const STATUS_LABEL: Record<ProjectStatus, string> = {
@@ -148,13 +162,13 @@ function ProjectCard({ project }: { project: Project }) {
         <div {...stylex.props(styles.links)}>
           {project.links.map((link) =>
             link.url.startsWith('/') ? (
-              <a
+              <Link
                 key={link.label}
-                href={link.url}
+                to={link.url}
                 {...stylex.props(shared.inkLink, styles.link)}
               >
                 {link.label}
-              </a>
+              </Link>
             ) : (
               <a
                 key={link.label}
@@ -175,26 +189,50 @@ function ProjectCard({ project }: { project: Project }) {
 
 export default function ProjectsPage() {
   const publicOnes = publicProjects()
+  const privateOnes = privateProjects()
 
   return (
     <main {...stylex.props(styles.main)}>
       <h1 {...stylex.props(styles.title)}>projects</h1>
       <p {...stylex.props(styles.lede)}>
-        Public satellites around zach — denser map above, full index below.
+        Public satellites around zach.
+        <span {...stylex.props(styles.ledeMap)}>
+          {' '}
+          Denser map above, full index below.
+        </span>
       </p>
 
       <div {...stylex.props(styles.mapFrame)}>
-        <ConstellationMap projects={publicOnes} mode="dense" showArc={false} mobileFallback={false} />
+        <ConstellationMap
+          projects={publicOnes}
+          mode="dense"
+          showArc={false}
+          mobileFallback={false}
+          hrefMode="anchor"
+        />
       </div>
 
       <div {...stylex.props(styles.sectionHead)}>
-        <span {...stylex.props(shared.regLabel)}>All projects</span>
+        <span {...stylex.props(shared.regLabel)}>Public</span>
       </div>
       <ul {...stylex.props(styles.list)}>
-        {projects.map((project) => (
+        {publicOnes.map((project) => (
           <ProjectCard key={project.slug} project={project} />
         ))}
       </ul>
+
+      {privateOnes.length > 0 ? (
+        <details {...stylex.props(styles.privateWrap)}>
+          <summary {...stylex.props(shared.regLabel, styles.privateSummary)}>
+            {privateOnes.length} private tools
+          </summary>
+          <ul {...stylex.props(styles.list)}>
+            {privateOnes.map((project) => (
+              <ProjectCard key={project.slug} project={project} />
+            ))}
+          </ul>
+        </details>
+      ) : null}
     </main>
   )
 }

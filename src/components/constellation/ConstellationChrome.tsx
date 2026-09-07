@@ -83,7 +83,6 @@ const styles = stylex.create({
 const NAV = [
   { to: '/projects', label: 'projects' },
   { to: '/about', label: 'about' },
-  { to: '/now', label: 'now' },
 ] as const
 
 export function ConstellationChrome() {

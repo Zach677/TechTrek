@@ -1,12 +1,15 @@
-import { useCallback, useId, useMemo, useState, type CSSProperties } from 'react'
+import { useMemo, useState, type CSSProperties } from 'react'
 import * as stylex from '@stylexjs/stylex'
 
 import type { Project } from '../../../data/projects'
 import { colors, fonts, typeScale } from '../../design-system/tokens.stylex'
 import {
+  CENTER,
   calloutSide,
-  centerPoint,
+  layoutEdges,
   layoutProjects,
+  nodeWeight,
+  pickPinned,
   polarAngle,
   projectCallout,
   projectHref,
@@ -75,47 +78,66 @@ const styles = stylex.create({
 })
 
 type Mode = 'featured' | 'dense'
+type HrefMode = 'external' | 'anchor'
 
 export function ConstellationMap({
   projects,
   mode = 'featured',
   showArc = true,
   mobileFallback = true,
-  className,
+  hrefMode = 'external',
 }: {
   projects: Project[]
   mode?: Mode
   showArc?: boolean
   /** When false, skip the stacked list used on small screens (e.g. projects page already lists). */
   mobileFallback?: boolean
-  className?: string
+  /** Home opens the project URL; /projects jumps to the card. */
+  hrefMode?: HrefMode
 }) {
-  const uid = useId()
   const [active, setActive] = useState<string | null>(null)
-  const center = centerPoint()
 
   const nodes = useMemo(() => {
     const points = layoutProjects(projects, mode)
     return projects
       .map((project, index) => ({
         project,
-        point: points[index] ?? { x: 50, y: 50 },
-        href: projectHref(project),
+        point: points[index] ?? CENTER,
+        href:
+          hrefMode === 'anchor' ? `#${project.slug}` : projectHref(project),
         callout: projectCallout(project),
-        drift: driftVars(project.slug, index),
+        weight: nodeWeight(project.featured, project.status),
       }))
       .sort((a, b) => polarAngle(a.point) - polarAngle(b.point))
-  }, [projects, mode])
+  }, [projects, mode, hrefMode])
 
+  const edges = useMemo(
+    () =>
+      layoutEdges(
+        CENTER,
+        nodes.map((n) => ({
+          slug: n.project.slug,
+          point: n.point,
+          featured: n.project.featured,
+        })),
+      ),
+    [nodes],
+  )
+
+  const pinned = useMemo(
+    () => (mode === 'featured' ? pickPinned(nodes, 2) : []),
+    [mode, nodes],
+  )
+  const pinnedSlugs = useMemo(
+    () => new Set(pinned.map((n) => n.project.slug)),
+    [pinned],
+  )
   const activeNode = nodes.find((n) => n.project.slug === active)
-
-  const onEnter = useCallback((slug: string) => setActive(slug), [])
-  const onLeave = useCallback(() => setActive(null), [])
 
   return (
     <>
       <div
-        className={`cx-map is-desktop-only${className ? ` ${className}` : ''}`}
+        className="cx-map is-desktop-only"
         role="group"
         aria-label="Project constellation map"
       >
@@ -138,72 +160,91 @@ export function ConstellationMap({
           </>
         ) : null}
 
-        <svg className="cx-edges" aria-hidden="true">
-          {nodes.map((n, i) => (
-            <line
-              key={n.project.slug}
-              className="cx-edge"
-              x1={`${center.x}%`}
-              y1={`${center.y}%`}
-              x2={`${n.point.x}%`}
-              y2={`${n.point.y}%`}
-              style={{ animationDelay: `${40 + i * 60}ms` }}
-            />
-          ))}
-        </svg>
-
-        <div
-          className="cx-node cx-center cx-drift"
-          style={{
-            left: `${center.x}%`,
-            top: `${center.y}%`,
-            ['--cx-drift-dur' as string]: '8s',
-            ['--cx-drift-x' as string]: '2px',
-            ['--cx-drift-y' as string]: '-2px',
-          }}
-          aria-hidden="true"
-        >
-          <span className="cx-pulse" />
-          <span className="cx-pulse" />
-          <span className="cx-dot" />
-          <span className="cx-label">zach</span>
+        <div className="cx-legend" aria-hidden="true">
+          <span className="cx-legend-item">
+            <i className="cx-ring" />
+            active
+          </span>
+          <span className="cx-legend-item">
+            <i className="cx-ring is-sm" />
+            paused
+          </span>
         </div>
 
-        {nodes.map((n) => {
-          const Tag = n.href ? 'a' : 'button'
-          const external = n.href?.startsWith('http')
-          return (
-            <Tag
-              key={n.project.slug}
-              className={`cx-node cx-drift${active === n.project.slug ? ' is-active' : ''}`}
-              style={{
-                left: `${n.point.x}%`,
-                top: `${n.point.y}%`,
-                ...n.drift,
-              }}
-              href={n.href}
-              type={n.href ? undefined : 'button'}
-              target={external ? '_blank' : undefined}
-              rel={external ? 'noopener noreferrer' : undefined}
-              aria-label={`${n.project.name}: ${n.callout}`}
-              onMouseEnter={() => onEnter(n.project.slug)}
-              onMouseLeave={onLeave}
-              onFocus={() => onEnter(n.project.slug)}
-              onBlur={onLeave}
-            >
-              <span className="cx-ring" />
-              <span className="cx-label">{n.project.name}</span>
-            </Tag>
-          )
-        })}
+        <div className="cx-graph cx-drift">
+          <svg className="cx-edges" aria-hidden="true">
+            {edges.map((e, i) => (
+              <line
+                key={e.key}
+                className="cx-edge"
+                x1={`${e.from.x}%`}
+                y1={`${e.from.y}%`}
+                x2={`${e.to.x}%`}
+                y2={`${e.to.y}%`}
+                style={{ animationDelay: `${40 + i * 60}ms` }}
+              />
+            ))}
+          </svg>
 
-        {activeNode ? (
-          <Callout
-            key={`${uid}-${activeNode.project.slug}`}
-            point={activeNode.point}
-            text={activeNode.callout}
-          />
-        ) : null}
+          <div
+            className="cx-node cx-center"
+            style={{
+              left: `${CENTER.x}%`,
+              top: `${CENTER.y}%`,
+            }}
+            aria-hidden="true"
+          >
+            <span className="cx-pulse" />
+            <span className="cx-pulse" />
+            <span className="cx-dot" />
+            <span className="cx-label">zach</span>
+          </div>
+
+          {nodes.map((n) => {
+            const Tag = n.href ? 'a' : 'button'
+            const external = hrefMode === 'external' && n.href?.startsWith('http')
+            return (
+              <Tag
+                key={n.project.slug}
+                className={`cx-node is-${n.weight}${active === n.project.slug ? ' is-active' : ''}`}
+                style={{
+                  left: `${n.point.x}%`,
+                  top: `${n.point.y}%`,
+                }}
+                href={n.href}
+                type={n.href ? undefined : 'button'}
+                target={external ? '_blank' : undefined}
+                rel={external ? 'noopener noreferrer' : undefined}
+                aria-label={`${n.project.name}: ${n.callout}`}
+                onMouseEnter={() => setActive(n.project.slug)}
+                onMouseLeave={() => setActive(null)}
+                onFocus={() => setActive(n.project.slug)}
+                onBlur={() => setActive(null)}
+              >
+                <span className="cx-ring" />
+                <span className="cx-label">{n.project.name}</span>
+              </Tag>
+            )
+          })}
+
+          {pinned.map((n) => (
+            <Callout
+              key={`pin-${n.project.slug}`}
+              point={n.point}
+              text={n.callout}
+              pinned
+              hot={active === n.project.slug}
+            />
+          ))}
+
+          {activeNode && !pinnedSlugs.has(activeNode.project.slug) ? (
+            <Callout
+              key={activeNode.project.slug}
+              point={activeNode.point}
+              text={activeNode.callout}
+            />
+          ) : null}
+        </div>
       </div>
 
       {mobileFallback ? <MobileFallback projects={projects} /> : null}
@@ -252,8 +293,17 @@ function MobileFallback({ projects }: { projects: Project[] }) {
   )
 }
 
-
-function Callout({ point, text }: { point: MapPoint; text: string }) {
+function Callout({
+  point,
+  text,
+  pinned = false,
+  hot = false,
+}: {
+  point: MapPoint
+  text: string
+  pinned?: boolean
+  hot?: boolean
+}) {
   const side = calloutSide(point)
   const leaderW = 28
   const drop = 14
@@ -271,8 +321,16 @@ function Callout({ point, text }: { point: MapPoint; text: string }) {
         textAlign: 'right',
       }
 
+  const className = [
+    'cx-callout',
+    pinned ? 'is-pinned' : '',
+    hot ? 'is-hot' : '',
+  ]
+    .filter(Boolean)
+    .join(' ')
+
   return (
-    <div className="cx-callout is-visible" style={wrapStyle}>
+    <div className={className} style={wrapStyle}>
       <span
         className="cx-leader"
         style={
@@ -316,20 +374,4 @@ function Callout({ point, text }: { point: MapPoint; text: string }) {
       </span>
     </div>
   )
-}
-
-function driftVars(slug: string, index: number): CSSProperties {
-  let h = 0
-  for (let i = 0; i < slug.length; i++) h = (h * 31 + slug.charCodeAt(i)) | 0
-  const dur = 6 + (Math.abs(h) % 5)
-  const dx = 2 + (Math.abs(h >> 3) % 3)
-  const dy = 2 + (Math.abs(h >> 5) % 3)
-  const signX = index % 2 === 0 ? 1 : -1
-  const signY = (h & 1) === 0 ? -1 : 1
-  return {
-    ['--cx-drift-dur' as string]: `${dur}s`,
-    ['--cx-drift-delay' as string]: `${(index * 0.35) % 2}s`,
-    ['--cx-drift-x' as string]: `${signX * dx}px`,
-    ['--cx-drift-y' as string]: `${signY * dy}px`,
-  }
 }

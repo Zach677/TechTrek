@@ -34,9 +34,15 @@ const styles = stylex.create({
   },
   mapFrame: {
     width: '100%',
-    maxWidth: '56rem',
-    height: 'min(68dvh, 36rem)',
-    minHeight: '20rem',
+    maxWidth: '68rem',
+    height: {
+      default: 'auto',
+      '@media (min-width: 640px)': 'min(72dvh, 40rem)',
+    },
+    minHeight: {
+      default: 0,
+      '@media (min-width: 640px)': '22rem',
+    },
     position: 'relative',
   },
   footer: {
