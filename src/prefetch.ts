@@ -1,17 +1,13 @@
-import pageIndex from 'virtual:pageIndex'
-import { loadPage } from './content-loader'
-import { loadPostPage } from './routes'
-
 interface NetworkInformation {
   saveData?: boolean
   effectiveType?: string
 }
 
 function prefetchRouteChunks() {
-  void loadPostPage()
-  for (const page of pageIndex) {
-    void loadPage(page.slug!)
-  }
+  void import('./pages/projects')
+  void import('./pages/about')
+  void import('./pages/now')
+  void import('./pages/mitori-privacy')
 }
 
 function scheduleIdle() {
@@ -23,8 +19,8 @@ function scheduleIdle() {
 }
 
 /**
- * Warm up lazy route chunks (PostPage + standalone pages) after the initial
- * load settles, so the first navigation doesn't pay the network roundtrips.
+ * Warm up lazy route chunks after the initial load settles, so the first
+ * navigation doesn't pay the network roundtrips.
  */
 export function schedulePrefetch() {
   const { connection } = navigator as { connection?: NetworkInformation }

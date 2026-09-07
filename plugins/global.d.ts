@@ -1,1 +1,1 @@
-/// <reference types="../types/content-provider" />
+// Hub build — no MDX virtual modules.

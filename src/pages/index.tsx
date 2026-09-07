@@ -1,10 +1,9 @@
 import * as stylex from '@stylexjs/stylex'
 import { Link } from 'react-router'
 
-import { FormattedTime } from '@/components/FormattedTime'
 import { colors, fonts, typeScale } from '../design-system/tokens.stylex'
 import { shared } from '../design-system/shared.stylex'
-import postIndex from 'virtual:postIndex'
+import { featuredProjects } from '../../data/projects'
 
 const WORDMARK = 'zaxh'
 
@@ -59,10 +58,17 @@ const styles = stylex.create({
     backgroundRepeat: 'no-repeat',
     backgroundPosition: '0 100%',
   },
-  index: {
-    marginTop: '5.5rem',
+  status: {
+    marginTop: '1rem',
+    maxWidth: '34rem',
+    fontSize: typeScale.copy15,
+    lineHeight: typeScale.copy15Lh,
+    color: colors.body,
   },
-  indexHead: {
+  section: {
+    marginTop: '4.5rem',
+  },
+  sectionHead: {
     display: 'flex',
     justifyContent: 'space-between',
     gap: '1rem',
@@ -71,9 +77,6 @@ const styles = stylex.create({
     borderBottomWidth: '1px',
     borderBottomStyle: 'solid',
     borderBottomColor: colors.separator,
-  },
-  nowrap: {
-    whiteSpace: 'nowrap',
   },
   list: {
     listStyle: 'none',
@@ -84,82 +87,41 @@ const styles = stylex.create({
     borderBottomWidth: '1px',
     borderBottomStyle: 'solid',
     borderBottomColor: colors.separatorSoft,
+    paddingBlock: '1.25rem',
   },
-  itemLink: {
-    display: 'flex',
-    alignItems: 'baseline',
-    justifyContent: 'space-between',
-    gap: '1.25rem',
-    paddingBlock: '1.35rem',
-    textDecoration: 'none',
-    color: 'inherit',
-    flexWrap: {
-      default: 'nowrap',
-      '@media (max-width: 720px)': 'wrap',
-    },
-    rowGap: {
-      default: null,
-      '@media (max-width: 720px)': '0.3rem',
-    },
-    transition: 'transform 0.4s var(--ease-spring)',
-    transform: {
-      default: null,
-      ':hover': {
-        default: null,
-        '@media (hover: hover)': 'translateX(10px)',
-      },
-    },
-  },
-  title: {
-    flexGrow: {
-      default: 1,
-      '@media (max-width: 720px)': 1,
-    },
-    flexShrink: {
-      default: 1,
-      '@media (max-width: 720px)': 1,
-    },
-    flexBasis: {
-      default: '0%',
-      '@media (max-width: 720px)': '100%',
-    },
-    minWidth: 0,
+  name: {
     fontFamily: fonts.serif,
-    fontSize: 'clamp(1.4rem, 2.6vw, 1.875rem)',
+    fontSize: 'clamp(1.25rem, 2.4vw, 1.6rem)',
     fontWeight: 500,
     lineHeight: 1.3,
     color: colors.heading,
+    margin: 0,
   },
-  date: {
-    flexGrow: 0,
-    flexShrink: 0,
-    fontFamily: fonts.mono,
-    fontSize: typeScale.label12,
-    lineHeight: typeScale.label12Lh,
+  oneLiner: {
+    marginTop: '0.35rem',
+    marginBottom: 0,
+    fontSize: typeScale.copy15,
+    lineHeight: typeScale.copy15Lh,
     color: colors.secondary,
-    whiteSpace: 'nowrap',
+    maxWidth: '36rem',
   },
-  empty: {
-    marginTop: '1.5rem',
-    color: colors.secondary,
+  portals: {
+    marginTop: '3.5rem',
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '1.25rem 1.75rem',
+  },
+  portal: {
+    fontFamily: fonts.serif,
     fontStyle: 'italic',
+    fontSize: typeScale.copy16,
+    color: colors.body,
   },
 })
 
-function PostItem({ post }: { post: PostMetadata }) {
-  const date = new Date(post.date!)
-
-  return (
-    <li {...stylex.props(styles.item)}>
-      <Link {...stylex.props(styles.itemLink)} to={`/post/${post.slug}`}>
-        <span {...stylex.props(styles.title)}>{post.title}</span>
-        <FormattedTime {...stylex.props(styles.date)} dateTime={date} />
-      </Link>
-    </li>
-  )
-}
-
 export default function RootPage() {
+  const featured = featuredProjects(3)
+
   return (
     <main {...stylex.props(styles.main)}>
       <h1 {...stylex.props(styles.masthead)} aria-label={WORDMARK}>
@@ -174,25 +136,39 @@ export default function RootPage() {
         I write code so my <em {...stylex.props(styles.em)}>cat</em> and{' '}
         <em {...stylex.props(styles.em)}>dog</em> can have a better life.
       </p>
+      <p {...stylex.props(styles.status)}>
+        Software engineer. Shipping small tools, Swift apps, and quiet
+        infrastructure — currently shaping this site into a personal hub.
+      </p>
 
-      <section {...stylex.props(styles.index)}>
-        <div {...stylex.props(styles.indexHead)}>
-          <span {...stylex.props(shared.regLabel)}>Recent writing</span>
-          <span {...stylex.props(shared.regLabel, styles.nowrap)}>
-            {postIndex.length} {postIndex.length === 1 ? 'entry' : 'entries'}
-          </span>
+      <section {...stylex.props(styles.section)}>
+        <div {...stylex.props(styles.sectionHead)}>
+          <span {...stylex.props(shared.regLabel)}>Featured projects</span>
+          <Link {...stylex.props(shared.inkLink, shared.regLabel)} to="/projects">
+            All projects →
+          </Link>
         </div>
-
-        {postIndex.length > 0 ? (
-          <ul {...stylex.props(styles.list)}>
-            {postIndex.map((post) => (
-              <PostItem key={post.slug} post={post} />
-            ))}
-          </ul>
-        ) : (
-          <p {...stylex.props(styles.empty)}>No posts yet. Stay tuned!</p>
-        )}
+        <ul {...stylex.props(styles.list)}>
+          {featured.map((project) => (
+            <li key={project.slug} {...stylex.props(styles.item)}>
+              <h2 {...stylex.props(styles.name)}>{project.name}</h2>
+              <p {...stylex.props(styles.oneLiner)}>{project.oneLiner}</p>
+            </li>
+          ))}
+        </ul>
       </section>
+
+      <nav {...stylex.props(styles.portals)} aria-label="Site sections">
+        <Link {...stylex.props(shared.inkLink, styles.portal)} to="/projects">
+          projects
+        </Link>
+        <Link {...stylex.props(shared.inkLink, styles.portal)} to="/about">
+          about
+        </Link>
+        <Link {...stylex.props(shared.inkLink, styles.portal)} to="/now">
+          now
+        </Link>
+      </nav>
     </main>
   )
 }

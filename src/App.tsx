@@ -11,7 +11,7 @@ import { IntlProvider } from './components/IntlProvider'
 // intentionally emit no canonical/og:url.
 export const appMetadata = {
   title: 'zaxh',
-  description: 'Zach\'s personal blog',
+  description: "Zach's personal hub",
 }
 
 export function App(props: {

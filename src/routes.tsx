@@ -1,36 +1,16 @@
-import { lazy, use } from 'react'
+import { lazy } from 'react'
 import { type RouteObject } from 'react-router'
 
 import RootLayout from './pages/layout'
 import NotFound from './pages/not-found'
 import ErrorBoundary from './pages/error'
 import type { RouteObjectWithMetadata } from './metadata/types'
-import { loadPost, loadPage } from './content-loader'
-import postIndex from 'virtual:postIndex'
-import pageIndex from 'virtual:pageIndex'
 
 const RootPage = lazy(() => import('./pages/index'))
-
-export const loadPostPage = () => import('./pages/post')
-const PostPage = lazy(loadPostPage)
-
-function pagePath(slug: string) {
-  return slug === 'mitori-privacy' ? 'mitori/privacy' : `page/${slug}`
-}
-
-function wrapPostPage(
-  slug: string,
-  loader: (slug: string) => Promise<PostModule>,
-) {
-  function WrappedPostPage() {
-    // Kick off the PostPage chunk fetch in parallel with the content chunk,
-    // instead of waiting for `use` to resolve before <PostPage> suspends.
-    void loadPostPage()
-    const postModule = use(loader(slug))
-    return <PostPage postModule={postModule} slug={slug} />
-  }
-  return WrappedPostPage
-}
+const ProjectsPage = lazy(() => import('./pages/projects'))
+const AboutPage = lazy(() => import('./pages/about'))
+const NowPage = lazy(() => import('./pages/now'))
+const MitoriPrivacyPage = lazy(() => import('./pages/mitori-privacy'))
 
 const routes: RouteObject[] = [
   {
@@ -41,27 +21,49 @@ const routes: RouteObject[] = [
         index: true,
         Component: RootPage,
         metadata: {
+          title: 'zaxh',
+          description:
+            "Zach's personal hub — projects, about, and what I'm doing now.",
           url: 'https://zaxh.org',
         },
       } as RouteObjectWithMetadata,
-      ...postIndex.map((post) => ({
-        path: `post/${post.slug}`,
-        Component: wrapPostPage(post.slug!, loadPost),
+      {
+        path: 'projects',
+        Component: ProjectsPage,
         metadata: {
-          title: post.title,
-          description: post.description,
-          url: `https://zaxh.org/post/${post.slug}`,
+          title: 'Projects',
+          description: 'Things Zach builds and maintains.',
+          url: 'https://zaxh.org/projects',
         },
-      })),
-      ...pageIndex.map((page) => ({
-        path: pagePath(page.slug!),
-        Component: wrapPostPage(page.slug!, loadPage),
+      } as RouteObjectWithMetadata,
+      {
+        path: 'about',
+        Component: AboutPage,
         metadata: {
-          title: page.title,
-          description: page.description,
-          url: `https://zaxh.org/${pagePath(page.slug!)}`,
+          title: 'About',
+          description: 'About Zach — contact, friends, and a few devices.',
+          url: 'https://zaxh.org/about',
         },
-      })),
+      } as RouteObjectWithMetadata,
+      {
+        path: 'now',
+        Component: NowPage,
+        metadata: {
+          title: 'Now',
+          description: "What Zach is doing these days.",
+          url: 'https://zaxh.org/now',
+        },
+      } as RouteObjectWithMetadata,
+      {
+        path: 'mitori/privacy',
+        Component: MitoriPrivacyPage,
+        metadata: {
+          title: 'Mitori Privacy Policy',
+          description:
+            'How Mitori handles Apple ID credentials, account data, network requests, and website analytics.',
+          url: 'https://zaxh.org/mitori/privacy',
+        },
+      } as RouteObjectWithMetadata,
     ],
   },
   {
