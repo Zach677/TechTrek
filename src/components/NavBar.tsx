@@ -7,7 +7,7 @@ import { Logo } from './Logo'
 
 const styles = stylex.create({
   nav: {
-    height: '5.5rem',
+    height: '4.25rem',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -27,10 +27,11 @@ const styles = stylex.create({
   },
   link: {
     position: 'relative',
-    fontFamily: fonts.serif,
-    fontStyle: 'italic',
-    fontSize: typeScale.copy15,
-    lineHeight: typeScale.copy15Lh,
+    fontFamily: fonts.mono,
+    fontStyle: 'normal',
+    fontSize: typeScale.label12,
+    lineHeight: typeScale.label12Lh,
+    letterSpacing: '0.04em',
     color: {
       default: colors.secondary,
       ':hover': colors.heading,

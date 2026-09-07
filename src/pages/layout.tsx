@@ -1,4 +1,4 @@
-import { Outlet, ScrollRestoration } from 'react-router'
+import { Outlet, ScrollRestoration, useLocation } from 'react-router'
 import * as stylex from '@stylexjs/stylex'
 import { Footer } from '@/components/Footer'
 import { NavBar } from '@/components/NavBar'
@@ -12,6 +12,18 @@ const styles = stylex.create({
 })
 
 export default function RootLayout() {
+  const { pathname } = useLocation()
+  const isHome = pathname === '/'
+
+  if (isHome) {
+    return (
+      <>
+        <Outlet />
+        <ScrollRestoration />
+      </>
+    )
+  }
+
   return (
     <>
       <ReadableArea>

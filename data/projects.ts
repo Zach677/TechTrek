@@ -10,6 +10,8 @@ export interface Project {
   slug: string
   name: string
   oneLiner: string
+  /** Short atlas callout for constellation hover (optional). */
+  callout?: string
   status: ProjectStatus
   tags: string[]
   links: ProjectLink[]
@@ -24,6 +26,7 @@ export const projects: Project[] = [
     name: 'mitori',
     oneLiner:
       'Native macOS menu bar app for checking Apple ID store credit across accounts.',
+    callout: 'menu bar · Apple ID credit',
     status: 'active',
     tags: ['Swift', 'macOS', 'AppKit'],
     links: [
@@ -37,6 +40,7 @@ export const projects: Project[] = [
     slug: 'apple-package',
     name: 'ApplePackage',
     oneLiner: 'ipatool rewrite as a Swift library and CLI for Apple packages.',
+    callout: 'ipatool rewrite · Swift CLI',
     status: 'active',
     tags: ['Swift', 'CLI', 'iOS'],
     links: [{ label: 'GitHub', url: 'https://github.com/Zach677/ApplePackage' }],
@@ -47,6 +51,7 @@ export const projects: Project[] = [
     slug: 'modern-uikit',
     name: 'Modern.UIKit',
     oneLiner: 'Agent-native UIKit starter for shipping iOS apps faster.',
+    callout: 'agent-native UIKit starter',
     status: 'active',
     tags: ['Swift', 'UIKit', 'iOS'],
     links: [{ label: 'GitHub', url: 'https://github.com/Zach677/Modern.UIKit' }],
@@ -58,6 +63,7 @@ export const projects: Project[] = [
     name: 'snell-panel',
     oneLiner:
       'Snell proxy node manager & subscription generator on Cloudflare Workers.',
+    callout: 'snell · Cloudflare Workers',
     status: 'active',
     tags: ['Cloudflare', 'Hono', 'Workers'],
     links: [{ label: 'GitHub', url: 'https://github.com/Zach677/snell-panel' }],
@@ -77,9 +83,11 @@ export const projects: Project[] = [
     slug: 'homebrew-star',
     name: 'homebrew-star',
     oneLiner: 'Casks and formulae not in the official Homebrew records.',
+    callout: 'casks & formulae off-record',
     status: 'active',
     tags: ['Homebrew', 'Ruby', 'macOS'],
     links: [{ label: 'GitHub', url: 'https://github.com/Zach677/homebrew-star' }],
+    featured: true,
     visibility: 'public',
   },
   {
@@ -217,8 +225,9 @@ export const projects: Project[] = [
   },
 ]
 
-export function featuredProjects(limit = 3): Project[] {
-  return projects.filter((p) => p.featured).slice(0, limit)
+export function featuredProjects(limit?: number): Project[] {
+  const featured = projects.filter((p) => p.featured)
+  return limit == null ? featured : featured.slice(0, limit)
 }
 
 export function publicProjects(): Project[] {

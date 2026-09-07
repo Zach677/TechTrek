@@ -1,30 +1,57 @@
 import * as stylex from '@stylexjs/stylex'
 
+import { ConstellationMap } from '@/components/constellation'
 import { colors, fonts, typeScale } from '../design-system/tokens.stylex'
 import { shared } from '../design-system/shared.stylex'
-import { projects, type Project, type ProjectStatus } from '../../data/projects'
+import {
+  projects,
+  publicProjects,
+  type Project,
+  type ProjectStatus,
+} from '../../data/projects'
 
 const styles = stylex.create({
   main: {
-    maxWidth: '42rem',
+    maxWidth: '52rem',
   },
   title: {
-    fontFamily: fonts.serif,
-    fontStyle: 'italic',
+    fontFamily: fonts.mono,
+    fontStyle: 'normal',
     fontWeight: 500,
-    fontSize: 'clamp(2.5rem, 6.5vw, 4rem)',
-    lineHeight: 1.1,
-    letterSpacing: '-0.01em',
-    margin: '2rem 0 0.75rem',
+    fontSize: typeScale.copy16,
+    lineHeight: typeScale.copy16Lh,
+    letterSpacing: '0.08em',
+    textTransform: 'lowercase',
+    margin: '1.25rem 0 0.5rem',
     color: colors.heading,
   },
   lede: {
-    margin: '0 0 3rem',
+    margin: '0 0 1.75rem',
     maxWidth: '34rem',
-    fontSize: typeScale.copy15,
-    lineHeight: typeScale.copy15Lh,
+    fontSize: typeScale.copy14,
+    lineHeight: typeScale.copy14Lh,
     color: colors.secondary,
-    fontStyle: 'italic',
+  },
+  mapFrame: {
+    width: '100%',
+    height: 'min(58dvh, 30rem)',
+    minHeight: '18rem',
+    position: 'relative',
+    marginBottom: {
+      default: 0,
+      '@media (min-width: 640px)': '2.5rem',
+    },
+    display: {
+      default: 'none',
+      '@media (min-width: 640px)': 'block',
+    },
+  },
+  sectionHead: {
+    marginBottom: '0.75rem',
+    paddingBottom: '0.65rem',
+    borderBottomWidth: '1px',
+    borderBottomStyle: 'solid',
+    borderBottomColor: colors.separator,
   },
   list: {
     listStyle: 'none',
@@ -32,7 +59,7 @@ const styles = stylex.create({
     padding: 0,
   },
   card: {
-    paddingBlock: '1.5rem',
+    paddingBlock: '1.15rem',
     borderBottomWidth: '1px',
     borderBottomStyle: 'solid',
     borderBottomColor: colors.separatorSoft,
@@ -45,10 +72,10 @@ const styles = stylex.create({
     flexWrap: 'wrap',
   },
   name: {
-    fontFamily: fonts.serif,
-    fontSize: 'clamp(1.35rem, 2.5vw, 1.75rem)',
+    fontFamily: fonts.mono,
+    fontSize: typeScale.copy15,
     fontWeight: 500,
-    lineHeight: 1.25,
+    lineHeight: 1.35,
     color: colors.heading,
     margin: 0,
   },
@@ -59,28 +86,28 @@ const styles = stylex.create({
     flexShrink: 0,
   },
   oneLiner: {
-    marginTop: '0.45rem',
+    marginTop: '0.35rem',
     marginBottom: 0,
-    fontSize: typeScale.copy15,
-    lineHeight: typeScale.copy15Lh,
+    fontSize: typeScale.copy14,
+    lineHeight: typeScale.copy14Lh,
     color: colors.body,
     maxWidth: '36rem',
   },
   tags: {
-    marginTop: '0.75rem',
+    marginTop: '0.55rem',
     display: 'flex',
     flexWrap: 'wrap',
-    gap: '0.5rem 0.85rem',
+    gap: '0.45rem 0.75rem',
   },
   links: {
-    marginTop: '0.85rem',
+    marginTop: '0.65rem',
     display: 'flex',
     flexWrap: 'wrap',
-    gap: '0.75rem 1.25rem',
+    gap: '0.65rem 1.1rem',
   },
   link: {
-    fontSize: typeScale.copy14,
-    lineHeight: typeScale.copy14Lh,
+    fontSize: typeScale.copy13,
+    lineHeight: typeScale.copy13Lh,
     color: colors.body,
   },
 })
@@ -95,7 +122,7 @@ function ProjectCard({ project }: { project: Project }) {
   const isPrivate = project.visibility === 'private'
 
   return (
-    <li {...stylex.props(styles.card)}>
+    <li {...stylex.props(styles.card)} id={project.slug}>
       <div {...stylex.props(styles.cardTop)}>
         <h2 {...stylex.props(styles.name)}>{project.name}</h2>
         <div {...stylex.props(styles.meta)}>
@@ -147,13 +174,22 @@ function ProjectCard({ project }: { project: Project }) {
 }
 
 export default function ProjectsPage() {
+  const publicOnes = publicProjects()
+
   return (
     <main {...stylex.props(styles.main)}>
-      <h1 {...stylex.props(styles.title)}>Projects</h1>
+      <h1 {...stylex.props(styles.title)}>projects</h1>
       <p {...stylex.props(styles.lede)}>
-        Things I build and maintain — cards with external links only. Draft
-        copy; edit freely.
+        Public satellites around zach — denser map above, full index below.
       </p>
+
+      <div {...stylex.props(styles.mapFrame)}>
+        <ConstellationMap projects={publicOnes} mode="dense" showArc={false} mobileFallback={false} />
+      </div>
+
+      <div {...stylex.props(styles.sectionHead)}>
+        <span {...stylex.props(shared.regLabel)}>All projects</span>
+      </div>
       <ul {...stylex.props(styles.list)}>
         {projects.map((project) => (
           <ProjectCard key={project.slug} project={project} />

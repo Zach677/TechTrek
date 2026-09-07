@@ -14,10 +14,10 @@ const styles = stylex.create({
     fontFamily: fonts.serif,
     fontStyle: 'italic',
     fontWeight: 500,
-    fontSize: 'clamp(2.5rem, 6.5vw, 4.2rem)',
-    lineHeight: 1.1,
+    fontSize: 'clamp(1.85rem, 4.5vw, 2.75rem)',
+    lineHeight: 1.15,
     letterSpacing: '-0.01em',
-    margin: '2rem 0',
+    margin: '1.25rem 0 1.5rem',
     color: colors.heading,
   },
   accent: {
