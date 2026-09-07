@@ -32,13 +32,16 @@ generatePathMappings([])
 
 const config = {
   version: 3,
-  routes: [],
+  routes: [
+    { src: '/rss/?', status: 308, headers: { Location: '/' } },
+    { src: '/rss.xml', status: 308, headers: { Location: '/' } },
+    { src: '/page/about/?', status: 308, headers: { Location: '/about' } },
+    { src: '/page/friends/?', status: 308, headers: { Location: '/about' } },
+    { src: '/post/(.*)', status: 308, headers: { Location: '/' } },
+    { src: '/page/(.*)', status: 308, headers: { Location: '/' } },
+  ],
   overrides: {
     ...pathMappings,
-    'rss.xml': {
-      path: 'rss',
-      contentType: 'application/rss+xml; charset=utf-8',
-    },
   },
 }
 

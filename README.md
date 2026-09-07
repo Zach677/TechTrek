@@ -1,6 +1,8 @@
-# ZachSpace
+# zaxh.org
 
-My personal blog built with React, Vite, and MDX.
+Zach's personal hub — home, projects, about, now.
+
+Built with React, Vite, and StyleX.
 
 ## Acknowledgments
 

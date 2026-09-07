@@ -19,12 +19,22 @@ const styles = stylex.create({
     borderTopColor: colors.separatorSoft,
     flexWrap: 'wrap',
   },
+  footerMap: {
+    marginTop: 0,
+    paddingTop: 0,
+    paddingBottom: 0,
+    borderTopWidth: 0,
+    width: '100%',
+  },
   label: {
     display: 'block',
     lineHeight: 1.9,
   },
   socialWrap: {
     marginTop: '0.75rem',
+  },
+  socialWrapMap: {
+    marginTop: '0.45rem',
   },
   social: {
     display: 'flex',
@@ -72,16 +82,21 @@ function SocialLinks() {
   )
 }
 
-export const Footer = () => {
+export const Footer = ({
+  variant = 'default',
+}: {
+  variant?: 'default' | 'constellation'
+}) => {
   const year = new Date().getFullYear()
+  const isMap = variant === 'constellation'
 
   return (
-    <footer {...stylex.props(styles.footer)}>
+    <footer {...stylex.props(styles.footer, isMap && styles.footerMap)}>
       <div>
         <span {...stylex.props(shared.regLabel, styles.label)}>
           © {year} Zach
         </span>
-        <div {...stylex.props(styles.socialWrap)}>
+        <div {...stylex.props(styles.socialWrap, isMap && styles.socialWrapMap)}>
           <SocialLinks />
         </div>
       </div>
